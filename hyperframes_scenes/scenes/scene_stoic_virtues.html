@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=720, height=1280">
+  <title>NASH-03 HyperFrames: 4 Stoic Cardinal Virtues</title>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      background: #030712;
+      color: #f9fafb;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Georgia", serif;
+      overflow: hidden;
+      width: 720px;
+      height: 1280px;
+    }
+    #root {
+      position: relative;
+      width: 720px;
+      height: 1280px;
+      overflow: hidden;
+      background: radial-gradient(circle at 50% 30%, #1e1b4b 0%, #0f172a 50%, #020617 100%);
+    }
+    .clip {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+    }
+    .ambient-glow {
+      position: absolute;
+      width: 600px;
+      height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(212, 175, 55, 0.25) 0%, rgba(99, 102, 241, 0.15) 50%, transparent 70%);
+      top: 150px;
+      left: 60px;
+      filter: blur(60px);
+      pointer-events: none;
+    }
+    .header-badge {
+      position: absolute;
+      top: 70px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(212, 175, 55, 0.5);
+      border-radius: 9999px;
+      padding: 10px 24px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+    }
+    .header-badge .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #d4af37;
+      box-shadow: 0 0 12px #d4af37;
+    }
+    .header-badge span {
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #f3f4f6;
+    }
+    .pillars-grid {
+      position: absolute;
+      top: 180px;
+      left: 40px;
+      right: 40px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+    .pillar-card {
+      background: rgba(30, 41, 59, 0.7);
+      border: 1px solid rgba(212, 175, 55, 0.3);
+      border-radius: 20px;
+      padding: 24px 20px;
+      backdrop-filter: blur(12px);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+    .pillar-icon {
+      font-size: 36px;
+      margin-bottom: 12px;
+      filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.4));
+    }
+    .pillar-title {
+      font-size: 17px;
+      font-weight: 800;
+      color: #fef08a;
+      letter-spacing: 1px;
+      margin-bottom: 4px;
+    }
+    .pillar-greek {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      color: #94a3b8;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+    .pillar-desc {
+      font-size: 13px;
+      color: #cbd5e1;
+      line-height: 1.4;
+    }
+    .quote-box {
+      position: absolute;
+      bottom: 240px;
+      left: 50px;
+      right: 50px;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(212, 175, 55, 0.45);
+      border-radius: 18px;
+      padding: 20px 24px;
+      text-align: center;
+      box-shadow: 0 12px 35px rgba(0, 0, 0, 0.5);
+    }
+    .quote-box p {
+      font-style: italic;
+      font-size: 15px;
+      color: #e2e8f0;
+      line-height: 1.5;
+      margin-bottom: 6px;
+    }
+    .quote-box span {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      color: #d4af37;
+      text-transform: uppercase;
+    }
+  </style>
+</head>
+<body>
+  <div id="root" data-composition-id="main" data-duration="16">
+    <div class="clip">
+      <div class="ambient-glow" id="ambientGlow"></div>
+      
+      <div class="pillars-grid">
+        <div class="pillar-card" id="cardWisdom">
+          <div class="pillar-icon">🧠</div>
+          <div class="pillar-title">KEBIJAKSANAAN</div>
+          <div class="pillar-greek">Sophia</div>
+          <div class="pillar-desc">Memahami apa yang baik, buruk, dan mana yang sepenuhnya di luar kendali kita.</div>
+        </div>
+
+        <div class="pillar-card" id="cardCourage">
+          <div class="pillar-icon">🦁</div>
+          <div class="pillar-title">KEBERANIAN</div>
+          <div class="pillar-greek">Andreia</div>
+          <div class="pillar-desc">Tegak berdiri melawan ketakutan dan tidak lari saat kenyataan terasa pahit.</div>
+        </div>
+
+        <div class="pillar-card" id="cardJustice">
+          <div class="pillar-icon">⚖️</div>
+          <div class="pillar-title">KEADILAN</div>
+          <div class="pillar-greek">Dikaiosyne</div>
+          <div class="pillar-desc">Memperlakukan sesama dengan integritas dan tidak egois di tengah kekacauan.</div>
+        </div>
+
+        <div class="pillar-card" id="cardTemperance">
+          <div class="pillar-icon">🛡️</div>
+          <div class="pillar-title">PENGENDALIAN</div>
+          <div class="pillar-greek">Sophrosyne</div>
+          <div class="pillar-desc">Kuasai emosi, nafsu, dan amarah sebelum mereka yang menguasai jalan hidupmu.</div>
+        </div>
+      </div>
+
+      <div class="quote-box" id="quoteBox">
+        <p>"Jangan buang waktu mendebatkan apa itu orang baik. Jadilah salah satunya."</p>
+        <span>— Marcus Aurelius</span>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const tl = gsap.timeline({ paused: true });
+
+    tl.from("#cardWisdom", { scale: 0.7, opacity: 0, duration: 0.8, ease: "back.out(1.5)" })
+      .from("#cardCourage", { scale: 0.7, opacity: 0, duration: 0.8, ease: "back.out(1.5)" }, "-=0.5")
+      .from("#cardJustice", { scale: 0.7, opacity: 0, duration: 0.8, ease: "back.out(1.5)" }, "-=0.5")
+      .from("#cardTemperance", { scale: 0.7, opacity: 0, duration: 0.8, ease: "back.out(1.5)" }, "-=0.5")
+      .from("#quoteBox", { y: 40, opacity: 0, duration: 0.9, ease: "power2.out" }, "-=0.4")
+      .to("#ambientGlow", { scale: 1.15, opacity: 0.85, duration: 2.5, yoyo: true, repeat: 4, ease: "sine.inOut" });
+
+    window.__timelines = { "main": tl };
+    tl.seek(0);
+  </script>
+</body>
+</html>

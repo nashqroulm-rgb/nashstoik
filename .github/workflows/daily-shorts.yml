@@ -1,0 +1,67 @@
+name: Daily Stoic Shorts Pipeline
+
+on:
+  schedule:
+    # 06:45 WIB = 23:45 UTC (Off-peak minute 45)
+    - cron: '45 23 * * *'
+  workflow_dispatch:
+    inputs:
+      day:
+        description: 'Day index to render & publish (e.g. 1, 2)'
+        required: false
+        default: '1'
+
+permissions:
+  contents: write
+
+jobs:
+  build-and-publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install System Dependencies (FFmpeg)
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ffmpeg
+
+      - name: Install Node Dependencies
+        run: npm install
+
+      - name: Install Python Dependencies
+        run: pip install edge-tts
+
+      - name: Execute Daily Pipeline
+        env:
+          ZERNIO_API_KEY: ${{ secrets.ZERNIO_API_KEY }}
+          TIKTOK_ACCOUNT_ID: ${{ secrets.TIKTOK_ACCOUNT_ID }}
+          TIKTOK_USERNAME: ${{ secrets.TIKTOK_USERNAME }}
+          INSTAGRAM_ACCOUNT_ID: ${{ secrets.INSTAGRAM_ACCOUNT_ID }}
+          INSTAGRAM_USERNAME: ${{ secrets.INSTAGRAM_USERNAME }}
+          GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
+          GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
+          YT_REFRESH_TOKEN: ${{ secrets.YT_REFRESH_TOKEN }}
+        run: |
+          echo "Running Nash Stoik Daily Pipeline..."
+          npx tsx scripts/pipeline-daily.ts --day ${{ github.event.inputs.day || '1' }}
+
+      - name: Commit State Updates
+        run: |
+          git config --global user.name "nashqroulm-rgb"
+          git config --global user.email "nasheroulb@gmail.com"
+          git add state/
+          git diff --quiet && git diff --staged --quiet || git commit -m "chore: sync publish state [skip ci]"
+          git push origin main

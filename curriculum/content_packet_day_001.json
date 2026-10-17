@@ -1,0 +1,57 @@
+{
+  "day": 1,
+  "week": 1,
+  "theme": "Hukum Dikotomi Kendali (The Dichotomy of Control)",
+  "philosopher": "Epictetus",
+  "title": "Hukum Dikotomi Kendali: Rahasia Hati Baja Epictetus",
+  "meta_title": "Hukum Dikotomi Kendali: Rahasia Hati Baja Epictetus #Shorts",
+  "hook": "Berhenti menyiksa dirimu atas hal yang tak bisa kau kendalikan!",
+  "script": "Berhenti menyiksa dirimu atas hal yang tak bisa kau kendalikan! Dua ribu tahun lalu, Epictetus membocorkan rahasia ketenangan mutlak: bagi hidupmu menjadi dua lingkaran. Lingkaran pertama: hal di luar kuasamu. Opini bos, gosip rekan kerja, hasil investasi, dan masa lalu. Mencemaskannya adalah kebodohan paling menyiksa. Lingkaran kedua: hal seratus persen dalam kendalimu. Pikiranmu, respon emosimu, dan usahamu hari ini. Mulai sekarang, setiap kali cemas melanda dada, tanyakan satu hal: apakah ini dalam kendaliku? Jika bukan, buang tanpa penyesalan dan tenanglah.",
+  "script_word_count": 86,
+  "estimated_duration_seconds": 46.5,
+  "scenes": [
+    {
+      "scene_id": "scene_01_hook",
+      "timeStart": 0,
+      "timeEnd": 6.5,
+      "type": "broll",
+      "visual_description": "Cinematic statue bust of a stoic philosopher, dark chiaroscuro lighting, moody slate atmosphere",
+      "videoSrc": "broll_cliff_ocean.mp4"
+    },
+    {
+      "scene_id": "scene_02_hyperframes_compass",
+      "timeStart": 6.5,
+      "timeEnd": 24.0,
+      "type": "hyperframes",
+      "visual_description": "HyperFrames dynamic vector animation of the Stoic Dichotomy Compass, rotating outer ring fading, inner golden ring glowing",
+      "videoSrc": "hyperframes_dichotomy_compass.mp4"
+    },
+    {
+      "scene_id": "scene_03_mindset_focus",
+      "timeStart": 24.0,
+      "timeEnd": 38.0,
+      "type": "broll",
+      "visual_description": "Atmospheric lone resolute figure standing calmly amid stormy misty mountain ridge",
+      "videoSrc": "broll_misty_mountain.mp4"
+    },
+    {
+      "scene_id": "scene_04_resolution",
+      "timeStart": 38.0,
+      "timeEnd": 48.0,
+      "type": "broll",
+      "visual_description": "Chiaroscuro marble hands chiselling stone, warm golden rim lighting",
+      "videoSrc": "broll_marble_statue.mp4"
+    }
+  ],
+  "youtube": {
+    "title": "Hukum Dikotomi Kendali: Rahasia Hati Baja Epictetus #Shorts",
+    "description": "Berhenti menyiksa dirimu atas hal yang tak bisa kau kendalikan! Pelajari hukum dikotomi kendali dari Epictetus untuk memiliki ketahanan mental sekuat baja di era modern.\n\n🏛️ Ikuti @nashstoik untuk bedah logika, disiplin, dan stoikisme setiap hari.\n\n#stoikisme #marcusauerlius #epictetus #seneca #mentaltoughness #filosofiteras #mindset #selfimprovement #shorts",
+    "tags": ["stoikisme", "epictetus", "marcus aurelius", "seneca", "filosofi teras", "mental toughness", "mindset", "self improvement", "shorts"]
+  },
+  "tiktok": {
+    "caption": "Berhenti menyiksa dirimu atas hal yang di luar kendalimu. Rumus hati baja Epictetus. #stoikisme #mindset #filosofiteras #selfimprovement #mentaltoughness"
+  },
+  "instagram": {
+    "caption": "Bagi hidupmu menjadi dua lingkaran: hal dalam kendalimu, dan hal di luar kendalimu. Fokuskan seluruh energimu pada lingkaran pertama.\n.\n🏛️ @nashstoik • Logika & Ketahanan Mental Harian.\n.\n#stoikisme #dikotomikendali #marcusauerlius #epictetus #filosofiteras #mindsetbaja #selfdevelopment"
+  }
+}

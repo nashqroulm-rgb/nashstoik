@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=720, height=1280">
+  <title>NASH-03 HyperFrames: Stoic Dichotomy Compass</title>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      background: #030712;
+      color: #f9fafb;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Georgia", serif;
+      overflow: hidden;
+      width: 720px;
+      height: 1280px;
+    }
+    #root {
+      position: relative;
+      width: 720px;
+      height: 1280px;
+      overflow: hidden;
+      background: radial-gradient(circle at 50% 36%, #1f2937 0%, #111827 55%, #030712 100%);
+    }
+    .clip {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+    }
+    /* Ambient Glow */
+    .ambient-glow {
+      position: absolute;
+      width: 580px;
+      height: 580px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(212, 175, 55, 0.22) 0%, rgba(99, 102, 241, 0.12) 40%, transparent 70%);
+      top: 180px;
+      left: 70px;
+      filter: blur(55px);
+      pointer-events: none;
+    }
+    /* Top Header Badge */
+    .header-badge {
+      position: absolute;
+      top: 70px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(17, 24, 39, 0.9);
+      border: 1px solid rgba(212, 175, 55, 0.5);
+      border-radius: 9999px;
+      padding: 10px 24px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+    }
+    .header-badge .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #d4af37;
+      box-shadow: 0 0 12px #d4af37;
+    }
+    .header-badge span {
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #f3f4f6;
+    }
+    /* Main Vector Container */
+    .compass-container {
+      position: absolute;
+      top: 160px;
+      left: 60px;
+      width: 600px;
+      height: 600px;
+    }
+    /* Bottom Insight Cards */
+    .cards-container {
+      position: absolute;
+      bottom: 240px;
+      left: 50px;
+      right: 50px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .card {
+      background: rgba(17, 24, 39, 0.88);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 18px;
+      padding: 18px 24px;
+      backdrop-filter: blur(12px);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+    .card.inner-control {
+      border-left: 5px solid #d4af37;
+      border-color: rgba(212, 175, 55, 0.4);
+    }
+    .card.outer-nocontrol {
+      border-left: 5px solid #64748b;
+      opacity: 0.85;
+    }
+    .card-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      flex-shrink: 0;
+    }
+    .inner-icon {
+      background: rgba(212, 175, 55, 0.18);
+      color: #d4af37;
+      border: 1px solid rgba(212, 175, 55, 0.35);
+    }
+    .outer-icon {
+      background: rgba(100, 116, 139, 0.18);
+      color: #94a3b8;
+      border: 1px solid rgba(100, 116, 139, 0.3);
+    }
+    .card-content h4 {
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      margin-bottom: 4px;
+    }
+    .card-content p {
+      font-size: 13.5px;
+      color: #9ca3af;
+      line-height: 1.4;
+    }
+    .inner-control h4 {
+      color: #fef08a;
+    }
+    .outer-nocontrol h4 {
+      color: #cbd5e1;
+    }
+  </style>
+</head>
+<body>
+  <div id="root" data-composition-id="main" data-duration="16">
+    <div class="clip">
+      <!-- Glow -->
+      <div class="ambient-glow" id="ambientGlow"></div>
+
+      <!-- SVG Compass Diagram -->
+      <div class="compass-container">
+        <svg viewBox="0 0 600 600" width="600" height="600">
+          <defs>
+            <radialGradient id="goldGlow" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="#d4af37" stop-opacity="0.3" />
+              <stop offset="100%" stop-color="#d4af37" stop-opacity="0" />
+            </radialGradient>
+            <linearGradient id="goldBorder" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#fef08a" />
+              <stop offset="50%" stop-color="#d4af37" />
+              <stop offset="100%" stop-color="#996515" />
+            </linearGradient>
+            <filter id="shadowFilter" x="-20%" y="-20%" width="140%" height="140%">
+              <feDropShadow dx="0" dy="4" stdDeviation="8" flood-color="#000000" flood-opacity="0.6"/>
+            </filter>
+          </defs>
+
+          <!-- Outer Ring: Di Luar Kendali -->
+          <g id="outerRing" filter="url(#shadowFilter)">
+            <circle cx="300" cy="300" r="240" fill="none" stroke="#334155" stroke-width="2" stroke-dasharray="6 6" />
+            <circle cx="300" cy="300" r="230" fill="rgba(30, 41, 59, 0.4)" stroke="#475569" stroke-width="1.5" />
+            
+            <!-- Orbiting Nodes for Outside Control -->
+            <g id="outerNodes">
+              <circle cx="300" cy="70" r="22" fill="#1e293b" stroke="#64748b" stroke-width="2" />
+              <text x="300" y="75" fill="#94a3b8" font-size="11" font-weight="700" text-anchor="middle">HASIL</text>
+
+              <circle cx="530" cy="300" r="22" fill="#1e293b" stroke="#64748b" stroke-width="2" />
+              <text x="530" y="305" fill="#94a3b8" font-size="11" font-weight="700" text-anchor="middle">OPINI</text>
+
+              <circle cx="300" cy="530" r="22" fill="#1e293b" stroke="#64748b" stroke-width="2" />
+              <text x="300" y="535" fill="#94a3b8" font-size="11" font-weight="700" text-anchor="middle">MASALAH</text>
+
+              <circle cx="70" cy="300" r="22" fill="#1e293b" stroke="#64748b" stroke-width="2" />
+              <text x="70" y="305" fill="#94a3b8" font-size="11" font-weight="700" text-anchor="middle">TAKDIR</text>
+            </g>
+            <text x="300" y="125" fill="#64748b" font-size="12" font-weight="600" letter-spacing="3" text-anchor="middle">ZONE 2: DI LUAR KENDALI (LEPASKAN)</text>
+          </g>
+
+          <!-- Inner Ring: Dalam Kendali -->
+          <g id="innerRing" filter="url(#shadowFilter)">
+            <circle cx="300" cy="300" r="145" fill="url(#goldGlow)" />
+            <circle cx="300" cy="300" r="140" fill="rgba(17, 24, 39, 0.95)" stroke="url(#goldBorder)" stroke-width="3.5" />
+            
+            <!-- Inner Ring Ticks -->
+            <circle cx="300" cy="300" r="120" fill="none" stroke="#d4af37" stroke-width="1.5" stroke-dasharray="3 9" opacity="0.6" />
+            
+            <!-- Center Core -->
+            <circle cx="300" cy="300" r="45" fill="#d4af37" opacity="0.15" />
+            <circle cx="300" cy="300" r="22" fill="#d4af37" filter="url(#shadowFilter)" />
+            <circle cx="300" cy="300" r="8" fill="#ffffff" />
+
+            <!-- Dynamic Compass Needle -->
+            <g id="needle">
+              <polygon points="300,165 310,290 300,285 290,290" fill="#fef08a" />
+              <polygon points="300,435 308,310 300,315 292,310" fill="#64748b" />
+            </g>
+
+            <!-- Center Text -->
+            <text x="300" y="240" fill="#fef08a" font-size="15" font-weight="800" letter-spacing="2" text-anchor="middle">ZONE 1: 100% KENDALIMU</text>
+            <text x="300" y="375" fill="#d1d5db" font-size="12" font-weight="600" text-anchor="middle">RESPON • USAHA • PIKIRAN</text>
+          </g>
+        </svg>
+      </div>
+
+      <!-- Action Cards -->
+      <div class="cards-container">
+        <div class="card inner-control" id="cardInner">
+          <div class="card-icon inner-icon">⚔️</div>
+          <div class="card-content">
+            <h4>FOKUSKAN 100% ENERGI DI SINI</h4>
+            <p>Bagaimana caramu merespon, disiplin harian, dan ketenangan batinmu saat dihantam masalah.</p>
+          </div>
+        </div>
+
+        <div class="card outer-nocontrol" id="cardOuter">
+          <div class="card-icon outer-icon">🛡️</div>
+          <div class="card-content">
+            <h4>STOP CEMAS ATAS HAL DI LUAR KENDALI</h4>
+            <p>Komentar orang, keputusan bos, dan masa depan. Cemas tidak akan mengubah apapun selain merusak kedamaianmu.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const tl = gsap.timeline({ paused: true });
+
+    // Choreographing the motion
+    tl.from("#outerRing", { scale: 0.8, opacity: 0, duration: 1, ease: "power2.out" })
+      .from("#innerRing", { scale: 0.6, opacity: 0, duration: 1.2, ease: "elastic.out(1, 0.75)" }, "-=0.6")
+      .to("#needle", { rotation: 360, transformOrigin: "300px 300px", duration: 3, ease: "power3.inOut" }, "-=0.8")
+      .to("#needle", { rotation: 0, transformOrigin: "300px 300px", duration: 1.2, ease: "back.out(2)" })
+      .from("#cardInner", { x: -60, opacity: 0, duration: 0.8, ease: "power2.out" }, "-=1.5")
+      .from("#cardOuter", { x: 60, opacity: 0, duration: 0.8, ease: "power2.out" }, "-=1.1")
+      .to("#ambientGlow", { scale: 1.2, opacity: 0.8, duration: 2, yoyo: true, repeat: 4, ease: "sine.inOut" });
+
+    window.__timelines = { "main": tl };
+    tl.seek(0);
+  </script>
+</body>
+</html>
