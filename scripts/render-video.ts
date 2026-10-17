@@ -81,50 +81,46 @@ async function main() {
     }
   }
 
-  // 5-Scene Atmospheric Human Realism Sequence (Faceless + Ethereal HyperFrames)
-  let scenes = packet.scenes;
-  if (!scenes || scenes.length === 0) {
-    // Default 5-Scene Calibrated Sequence
-    const t0 = 0;
-    const t1 = audioDuration * 0.22;
-    const t2 = audioDuration * 0.40;
-    const t3 = audioDuration * 0.72;
-    const t4 = audioDuration * 0.88;
-    const t5 = audioDuration + 1.4;
+  // 5-Scene Atmospheric Human Realism Sequence (Dynamically scaled to audio duration)
+  const t0 = 0;
+  const t1 = Math.round(audioDuration * 0.20 * 10) / 10;
+  const t2 = Math.round(audioDuration * 0.38 * 10) / 10;
+  const t3 = Math.round(audioDuration * 0.68 * 10) / 10;
+  const t4 = Math.round(audioDuration * 0.84 * 10) / 10;
+  const t5 = audioDuration + 1.4;
 
-    scenes = [
-      {
-        scene_id: "SCENE_01_NIGHT_INSOMNIA",
-        timeStart: t0,
-        timeEnd: t1,
-        videoSrc: "broll/scene_01_night_insomnia.mp4",
-      },
-      {
-        scene_id: "SCENE_02_RAIN_WINDOW",
-        timeStart: t1,
-        timeEnd: t2,
-        videoSrc: "broll/scene_02_rain_window.mp4",
-      },
-      {
-        scene_id: "SCENE_03_HYPERFRAMES_ETHEREAL",
-        timeStart: t2,
-        timeEnd: t3,
-        videoSrc: "hyperframes_stoic_ethereal.mp4",
-      },
-      {
-        scene_id: "SCENE_04_COFFEE_STEAM",
-        timeStart: t3,
-        timeEnd: t4,
-        videoSrc: "broll/scene_04_coffee_steam.mp4",
-      },
-      {
-        scene_id: "SCENE_05_SUNRISE_HORIZON",
-        timeStart: t4,
-        timeEnd: t5,
-        videoSrc: "broll/scene_05_walking_sunrise.mp4",
-      },
-    ];
-  }
+  const scenes = [
+    {
+      scene_id: "SCENE_01_NIGHT_INSOMNIA",
+      timeStart: t0,
+      timeEnd: t1,
+      videoSrc: "broll/scene_01_night_insomnia.mp4",
+    },
+    {
+      scene_id: "SCENE_02_RAIN_WINDOW",
+      timeStart: t1,
+      timeEnd: t2,
+      videoSrc: "broll/scene_02_rain_window.mp4",
+    },
+    {
+      scene_id: "SCENE_03_HYPERFRAMES_ETHEREAL",
+      timeStart: t2,
+      timeEnd: t3,
+      videoSrc: "hyperframes_stoic_ethereal.mp4",
+    },
+    {
+      scene_id: "SCENE_04_COFFEE_STEAM",
+      timeStart: t3,
+      timeEnd: t4,
+      videoSrc: "broll/scene_04_coffee_steam.mp4",
+    },
+    {
+      scene_id: "SCENE_05_SUNRISE_HORIZON",
+      timeStart: t4,
+      timeEnd: t5,
+      videoSrc: "broll/scene_05_walking_sunrise.mp4",
+    },
+  ];
 
   const inputProps = {
     channelName: "Nash Stoik",
@@ -184,7 +180,7 @@ async function main() {
         "--use-angle=d3d11",
       ],
     },
-    concurrency: 1,
+    concurrency: 2,
     onProgress: ({ renderedFrames, encodedFrames }) => {
       const pct = Math.round((renderedFrames / durationInFrames) * 100);
       if (renderedFrames % 120 === 0 || renderedFrames === durationInFrames) {

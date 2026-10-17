@@ -91,6 +91,7 @@ const SceneRenderer: React.FC<{
         <Video
           src={staticFile(sc.videoSrc)}
           muted
+          loop
           style={{
             width: "100%",
             height: "100%",
