@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=1080, height=1920">
-  <title>NASH-03 HyperFrames: The Ethereal Divide Fullscreen</title>
+  <title>NASH-03 HyperFrames: Perfectly Calibrated Safe Zones</title>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
   <style>
     * {
@@ -24,12 +24,7 @@
       width: 1080px;
       height: 1920px;
       overflow: hidden;
-      background: radial-gradient(circle at 50% 45%, #0f1827 0%, #070b14 55%, #020306 100%);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: space-between;
-      padding: 180px 60px 240px 60px;
+      background: radial-gradient(circle at 50% 46%, #0f1827 0%, #070b14 55%, #020306 100%);
     }
 
     /* Ambient Nebular Glow */
@@ -45,55 +40,72 @@
       pointer-events: none;
     }
 
-    /* Cinematic Center Horizon Divider */
-    .horizon-container {
+    /* 
+      PERFECT SAFE ZONE CONTAINER:
+      Top 0 - 320px: Reserved for HUD Header & Top Progress
+      Bottom 1440px - 1920px: Reserved for Subtitles & Platform Safe Area
+      Active Safe Zone: Y = 320px to 1440px (Height: 1120px)
+    */
+    .safe-zone {
       position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 920px;
+      top: 320px;
+      left: 80px;
+      right: 80px;
+      height: 1120px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 10;
+    }
+
+    /* Center Horizon Divider (Right in the middle of active safe zone) */
+    .horizon-container {
+      width: 860px;
+      height: 2px;
       display: flex;
       align-items: center;
       justify-content: center;
+      position: relative;
       pointer-events: none;
-      z-index: 5;
+      margin: 20px 0;
     }
     .horizon-line {
       width: 100%;
       height: 1.5px;
       background: linear-gradient(90deg, transparent 0%, rgba(212, 175, 55, 0.65) 50%, transparent 100%);
-      box-shadow: 0 0 20px rgba(212, 175, 55, 0.6);
+      box-shadow: 0 0 18px rgba(212, 175, 55, 0.6);
     }
     .horizon-diamond {
       position: absolute;
-      width: 13px;
-      height: 13px;
+      width: 12px;
+      height: 12px;
       background: #fef08a;
       transform: rotate(45deg);
       box-shadow: 0 0 16px #fef08a;
     }
 
-    /* Realm 1: Outside Control (Top Half) */
+    /* Realm 1: Outside Control (Upper Section) */
     .realm-outer {
       display: flex;
       flex-direction: column;
       align-items: center;
       text-align: center;
-      gap: 22px;
-      z-index: 10;
-      margin-top: 40px;
+      gap: 16px;
+      width: 100%;
+      padding-top: 15px;
     }
     .realm-label-outer {
-      font-size: 18px;
+      font-size: 16px;
       font-weight: 700;
-      letter-spacing: 5px;
+      letter-spacing: 4px;
       color: #64748b;
       text-transform: uppercase;
     }
     .title-outer {
-      font-size: 52px;
+      font-size: 46px;
       font-weight: 800;
-      letter-spacing: 3px;
+      letter-spacing: 2.5px;
       color: #94a3b8;
       text-transform: uppercase;
       font-family: "Georgia", serif;
@@ -101,84 +113,84 @@
     .items-outer {
       display: flex;
       flex-direction: column;
-      gap: 16px;
-      margin-top: 12px;
+      gap: 12px;
+      margin-top: 6px;
     }
     .item-smoke {
-      font-size: 28px;
+      font-size: 24px;
       font-weight: 600;
-      letter-spacing: 2px;
+      letter-spacing: 1.5px;
       color: #64748b;
       font-family: -apple-system, sans-serif;
     }
     .tag-dissolve {
-      margin-top: 16px;
-      font-size: 20px;
+      margin-top: 10px;
+      font-size: 18px;
       font-weight: 800;
-      letter-spacing: 4px;
+      letter-spacing: 3.5px;
       color: #ef4444;
       opacity: 0.85;
       text-transform: uppercase;
     }
 
-    /* Realm 2: In Your Hands (Bottom Half) */
+    /* Realm 2: In Your Hands (Lower Section) */
     .realm-inner {
       display: flex;
       flex-direction: column;
       align-items: center;
       text-align: center;
-      gap: 24px;
-      z-index: 10;
-      margin-bottom: 20px;
+      gap: 18px;
+      width: 100%;
+      padding-bottom: 10px;
     }
     .realm-label-inner {
-      font-size: 18px;
+      font-size: 16px;
       font-weight: 700;
-      letter-spacing: 5px;
+      letter-spacing: 4px;
       color: #d4af37;
       text-transform: uppercase;
     }
     .title-inner {
-      font-size: 58px;
+      font-size: 52px;
       font-weight: 900;
-      letter-spacing: 3.5px;
+      letter-spacing: 3px;
       background: linear-gradient(135deg, #ffffff 0%, #fef08a 40%, #d4af37 80%, #b45309 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       text-transform: uppercase;
       font-family: "Georgia", serif;
-      filter: drop-shadow(0 0 35px rgba(212, 175, 55, 0.5));
+      filter: drop-shadow(0 0 30px rgba(212, 175, 55, 0.45));
     }
     .items-inner {
       display: flex;
       flex-direction: column;
-      gap: 18px;
-      margin-top: 8px;
+      gap: 14px;
+      margin-top: 4px;
     }
     .item-gold {
-      font-size: 30px;
+      font-size: 26px;
       font-weight: 700;
-      letter-spacing: 2px;
+      letter-spacing: 1.5px;
       color: #f8fafc;
       font-family: -apple-system, sans-serif;
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 14px;
+      gap: 12px;
     }
     .gold-bullet {
-      width: 9px;
-      height: 9px;
+      width: 8px;
+      height: 8px;
       border-radius: 50%;
       background: #fef08a;
-      box-shadow: 0 0 14px #fef08a;
+      box-shadow: 0 0 12px #fef08a;
     }
 
-    /* Serene Stoic Boat Illustration (Pure Line Art SVG) */
+    /* Minimalist Golden Sailboat */
     .boat-container {
-      width: 200px;
-      height: 100px;
-      margin-top: 15px;
+      width: 170px;
+      height: 80px;
+      margin-top: 10px;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -194,48 +206,50 @@
   <div id="root" data-composition-id="main" data-duration="16" data-width="1080" data-height="1920">
     <div class="ambient-glow" id="ambientGlow"></div>
 
-    <!-- Center Horizon Divider -->
-    <div class="horizon-container" id="horizonContainer">
-      <div class="horizon-line"></div>
-      <div class="horizon-diamond"></div>
-    </div>
-
-    <!-- Upper Realm: Outside Control (Dissolves into Smoke) -->
-    <div class="realm-outer" id="realmOuter">
-      <div class="realm-label-outer">Bagian Pertama</div>
-      <div class="title-outer">DI LUAR KENDALIMU</div>
-      <div class="items-outer" id="itemsOuter">
-        <div class="item-smoke">Opini Orang Lain</div>
-        <div class="item-smoke">Hasil Masa Depan</div>
-        <div class="item-smoke">Masa Lalu</div>
-      </div>
-      <div class="tag-dissolve" id="tagDissolve">— LEPASKAN —</div>
-    </div>
-
-    <!-- Lower Realm: In Your Hands (Glows with Living Gold) -->
-    <div class="realm-inner" id="realmInner">
-      <div class="realm-label-inner">Bagian Kedua</div>
-      <div class="title-inner" id="titleInner">DI TANGANMU</div>
-      <div class="items-inner" id="itemsInner">
-        <div class="item-gold"><span class="gold-bullet"></span> Respon Emosimu</div>
-        <div class="item-gold"><span class="gold-bullet"></span> Menjaga Dirimu</div>
-        <div class="item-gold"><span class="gold-bullet"></span> Usahamu Esok Pagi</div>
+    <div class="safe-zone">
+      <!-- Upper Realm: Outside Control (Dissolves into Smoke) -->
+      <div class="realm-outer" id="realmOuter">
+        <div class="realm-label-outer">Bagian Pertama</div>
+        <div class="title-outer">DI LUAR KENDALIMU</div>
+        <div class="items-outer" id="itemsOuter">
+          <div class="item-smoke">Opini Orang Lain</div>
+          <div class="item-smoke">Hasil Masa Depan</div>
+          <div class="item-smoke">Masa Lalu</div>
+        </div>
+        <div class="tag-dissolve" id="tagDissolve">— LEPASKAN —</div>
       </div>
 
-      <!-- Minimalist Golden Sailboat -->
-      <div class="boat-container" id="boatContainer">
-        <svg class="boat-svg" viewBox="0 0 100 50">
-          <!-- Water gentle ripple -->
-          <path d="M 5 42 Q 25 38 50 42 T 95 42" stroke="rgba(212, 175, 55, 0.45)" stroke-width="1.8" fill="none" />
-          <!-- Boat Hull -->
-          <path d="M 22 36 L 78 36 L 68 44 L 32 44 Z" fill="none" stroke="#d4af37" stroke-width="2.2" stroke-linejoin="round" />
-          <!-- Sail & Mast -->
-          <line x1="50" y1="12" x2="50" y2="36" stroke="#d4af37" stroke-width="2.2" />
-          <path d="M 50 14 L 72 32 L 50 32 Z" fill="rgba(212, 175, 55, 0.25)" stroke="#fef08a" stroke-width="1.8" />
-          <path d="M 48 18 L 32 32 L 48 32 Z" fill="rgba(212, 175, 55, 0.15)" stroke="#d4af37" stroke-width="1.4" />
-          <!-- Warm Lantern at Mast -->
-          <circle cx="50" cy="22" r="3.5" fill="#fef08a" filter="drop-shadow(0 0 8px #fef08a)" />
-        </svg>
+      <!-- Center Horizon Divider -->
+      <div class="horizon-container" id="horizonContainer">
+        <div class="horizon-line"></div>
+        <div class="horizon-diamond"></div>
+      </div>
+
+      <!-- Lower Realm: In Your Hands (Glows with Living Gold) -->
+      <div class="realm-inner" id="realmInner">
+        <div class="realm-label-inner">Bagian Kedua</div>
+        <div class="title-inner" id="titleInner">DI TANGANMU</div>
+        <div class="items-inner" id="itemsInner">
+          <div class="item-gold"><span class="gold-bullet"></span> Respon Emosimu</div>
+          <div class="item-gold"><span class="gold-bullet"></span> Menjaga Dirimu</div>
+          <div class="item-gold"><span class="gold-bullet"></span> Usahamu Esok Pagi</div>
+        </div>
+
+        <!-- Minimalist Golden Sailboat -->
+        <div class="boat-container" id="boatContainer">
+          <svg class="boat-svg" viewBox="0 0 100 50">
+            <!-- Water gentle ripple -->
+            <path d="M 5 42 Q 25 38 50 42 T 95 42" stroke="rgba(212, 175, 55, 0.45)" stroke-width="1.8" fill="none" />
+            <!-- Boat Hull -->
+            <path d="M 22 36 L 78 36 L 68 44 L 32 44 Z" fill="none" stroke="#d4af37" stroke-width="2.2" stroke-linejoin="round" />
+            <!-- Sail & Mast -->
+            <line x1="50" y1="12" x2="50" y2="36" stroke="#d4af37" stroke-width="2.2" />
+            <path d="M 50 14 L 72 32 L 50 32 Z" fill="rgba(212, 175, 55, 0.25)" stroke="#fef08a" stroke-width="1.8" />
+            <path d="M 48 18 L 32 32 L 48 32 Z" fill="rgba(212, 175, 55, 0.15)" stroke="#d4af37" stroke-width="1.4" />
+            <!-- Warm Lantern at Mast -->
+            <circle cx="50" cy="22" r="3.5" fill="#fef08a" filter="drop-shadow(0 0 8px #fef08a)" />
+          </svg>
+        </div>
       </div>
     </div>
   </div>
@@ -245,15 +259,15 @@
 
     // 1. Initial Reveal (Seconds 0 - 2.5)
     tl.from("#horizonContainer", { scaleX: 0, opacity: 0, duration: 1.2, ease: "power2.out" })
-      .from("#realmOuter", { y: -40, opacity: 0, duration: 1.0, ease: "power2.out" }, "-=0.6")
-      .from("#itemsOuter .item-smoke", { y: -20, opacity: 0, stagger: 0.25, duration: 0.8, ease: "power2.out" }, "-=0.5")
+      .from("#realmOuter", { y: -30, opacity: 0, duration: 1.0, ease: "power2.out" }, "-=0.6")
+      .from("#itemsOuter .item-smoke", { y: -15, opacity: 0, stagger: 0.25, duration: 0.8, ease: "power2.out" }, "-=0.5")
       .from("#tagDissolve", { opacity: 0, scale: 0.8, duration: 0.6, ease: "back.out(1.5)" }, "-=0.2")
 
       // 2. The Great Release: "Lepaskan..." Smoke Dissolve (Seconds 7 - 9.5)
       .to("#tagDissolve", { opacity: 1, scale: 1.1, duration: 0.6, ease: "power1.inOut" }, "+=3.5")
       .to("#realmOuter", {
         filter: "blur(18px)",
-        y: -50,
+        y: -40,
         opacity: 0.15,
         scale: 0.95,
         duration: 2.2,
@@ -261,20 +275,20 @@
       }, "+=0.5")
 
       // 3. The Golden Ignition: "Yang kedua, hal di tanganmu" (Seconds 9.5 - 14)
-      .from("#realmInner", { y: 50, opacity: 0, duration: 1.2, ease: "power2.out" }, "-=1.0")
-      .from("#itemsInner .item-gold", { y: 25, opacity: 0, stagger: 0.35, duration: 0.9, ease: "power2.out" }, "-=0.6")
+      .from("#realmInner", { y: 40, opacity: 0, duration: 1.2, ease: "power2.out" }, "-=1.0")
+      .from("#itemsInner .item-gold", { y: 20, opacity: 0, stagger: 0.35, duration: 0.9, ease: "power2.out" }, "-=0.6")
       .from("#boatContainer", { scale: 0.6, opacity: 0, duration: 1.2, ease: "back.out(1.4)" }, "-=0.4")
       .to("#titleInner", {
-        scale: 1.06,
-        filter: "drop-shadow(0 0 45px rgba(212, 175, 55, 0.9))",
+        scale: 1.05,
+        filter: "drop-shadow(0 0 40px rgba(212, 175, 55, 0.85))",
         duration: 1.5,
         yoyo: true,
         repeat: 2,
         ease: "sine.inOut"
       }, "<")
       .to("#boatContainer svg", {
-        y: -6,
-        rotation: 1.8,
+        y: -5,
+        rotation: 1.5,
         duration: 2.0,
         yoyo: true,
         repeat: 4,
