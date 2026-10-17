@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=720, height=1280">
+  <title>NASH-03 HyperFrames: Dua Pilar Kendali Stoik</title>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      background: #06090e;
+      color: #f8fafc;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Georgia", serif;
+      overflow: hidden;
+      width: 720px;
+      height: 1280px;
+    }
+    #root {
+      position: relative;
+      width: 720px;
+      height: 1280px;
+      overflow: hidden;
+      background: radial-gradient(circle at 50% 32%, #131d2a 0%, #0a1017 55%, #040609 100%);
+    }
+    .clip {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+    }
+    /* Ambient warm candlelight glow */
+    .candle-glow {
+      position: absolute;
+      width: 520px;
+      height: 520px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(212, 175, 55, 0.22) 0%, rgba(245, 158, 11, 0.08) 45%, transparent 70%);
+      top: 140px;
+      left: 100px;
+      filter: blur(55px);
+      pointer-events: none;
+    }
+    /* Two Pillars Container */
+    .pillars-container {
+      position: absolute;
+      top: 165px;
+      left: 35px;
+      right: 35px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    /* Pillar Card Common */
+    .pillar-card {
+      border-radius: 20px;
+      padding: 24px 18px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      backdrop-filter: blur(12px);
+      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.5);
+      position: relative;
+    }
+    /* Left Pillar: Di Luar Kendali (Muted / Let Go) */
+    .pillar-outer {
+      background: rgba(15, 23, 42, 0.75);
+      border: 1.5px solid rgba(148, 163, 184, 0.25);
+    }
+    .pillar-outer .badge {
+      background: rgba(100, 116, 139, 0.25);
+      color: #94a3b8;
+      border: 1px solid rgba(148, 163, 184, 0.3);
+    }
+    .pillar-outer h3 {
+      color: #cbd5e1;
+    }
+    /* Right Pillar: Dalam Kendali (Gold / Focused) */
+    .pillar-inner {
+      background: rgba(23, 31, 46, 0.88);
+      border: 1.5px solid rgba(212, 175, 55, 0.55);
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6), 0 0 25px rgba(212, 175, 55, 0.15);
+    }
+    .pillar-inner .badge {
+      background: rgba(212, 175, 55, 0.22);
+      color: #fef08a;
+      border: 1px solid rgba(212, 175, 55, 0.5);
+    }
+    .pillar-inner h3 {
+      color: #fef08a;
+    }
+    .pillar-icon {
+      font-size: 38px;
+      margin-bottom: 12px;
+      filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.5));
+    }
+    .badge {
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 5px 12px;
+      border-radius: 9999px;
+      margin-bottom: 10px;
+    }
+    .pillar-card h3 {
+      font-size: 17px;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+      margin-bottom: 16px;
+      line-height: 1.3;
+    }
+    .bullet-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      width: 100%;
+      text-align: left;
+    }
+    .bullet-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 13.5px;
+      line-height: 1.35;
+      padding: 8px 10px;
+      border-radius: 10px;
+    }
+    .pillar-outer .bullet-item {
+      background: rgba(30, 41, 59, 0.5);
+      color: #94a3b8;
+    }
+    .pillar-inner .bullet-item {
+      background: rgba(30, 41, 59, 0.85);
+      color: #f1f5f9;
+      font-weight: 600;
+      border-left: 3px solid #d4af37;
+    }
+    .bullet-icon {
+      font-size: 14px;
+      flex-shrink: 0;
+    }
+    /* Bottom Floating Reassurance Card */
+    .mentor-card {
+      position: absolute;
+      bottom: 240px;
+      left: 40px;
+      right: 40px;
+      background: rgba(15, 23, 42, 0.94);
+      border: 1px solid rgba(212, 175, 55, 0.45);
+      border-radius: 18px;
+      padding: 18px 24px;
+      text-align: center;
+      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(14px);
+    }
+    .mentor-card .tag {
+      font-size: 11px;
+      font-weight: 800;
+      color: #d4af37;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+    .mentor-card p {
+      font-size: 14.5px;
+      font-style: italic;
+      color: #e2e8f0;
+      line-height: 1.45;
+    }
+  </style>
+</head>
+<body>
+  <div id="root" data-composition-id="main" data-duration="16">
+    <div class="clip">
+      <div class="candle-glow" id="candleGlow"></div>
+
+      <!-- Two Clean Balanced Pillars -->
+      <div class="pillars-container">
+        <!-- Left: Di Luar Kendali -->
+        <div class="pillar-card pillar-outer" id="cardOuter">
+          <div class="pillar-icon">🍃</div>
+          <div class="badge">LEPASKAN</div>
+          <h3>DI LUAR KENDALI</h3>
+          <ul class="bullet-list">
+            <li class="bullet-item">
+              <span class="bullet-icon">✕</span>
+              <span>Opini & Gosip Orang</span>
+            </li>
+            <li class="bullet-item">
+              <span class="bullet-icon">✕</span>
+              <span>Hasil Masa Depan</span>
+            </li>
+            <li class="bullet-item">
+              <span class="bullet-icon">✕</span>
+              <span>Masa Lalu yang Lewat</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Right: Dalam Kendali -->
+        <div class="pillar-card pillar-inner" id="cardInner">
+          <div class="pillar-icon">⚔️</div>
+          <div class="badge">FOKUS DI SINI</div>
+          <h3>DALAM KENDALIMU</h3>
+          <ul class="bullet-list">
+            <li class="bullet-item">
+              <span class="bullet-icon">✓</span>
+              <span>Respon Emosimu</span>
+            </li>
+            <li class="bullet-item">
+              <span class="bullet-icon">✓</span>
+              <span>Caramu Menjaga Diri</span>
+            </li>
+            <li class="bullet-item">
+              <span class="bullet-icon">✓</span>
+              <span>Usahamu Esok Pagi</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Mentor Reassurance Card -->
+      <div class="mentor-card" id="mentorCard">
+        <div class="tag">NASEHAT MENTOR</div>
+        <p>"Jangan biarkan ombak di luar sana menenggelamkan ketenangan perahumu."</p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const tl = gsap.timeline({ paused: true });
+
+    tl.from("#cardOuter", { x: -40, opacity: 0, duration: 0.9, ease: "power2.out" })
+      .from("#cardInner", { x: 40, opacity: 0, duration: 0.9, ease: "power2.out" }, "-=0.7")
+      .from("#mentorCard", { y: 30, opacity: 0, duration: 0.8, ease: "power2.out" }, "-=0.3")
+      .to("#cardOuter", { opacity: 0.75, scale: 0.98, duration: 1.5, ease: "power1.inOut" }, "+=0.5")
+      .to("#cardInner", { scale: 1.02, duration: 1.5, ease: "power1.inOut" }, "<")
+      .to("#candleGlow", { scale: 1.15, opacity: 0.85, duration: 2.5, yoyo: true, repeat: 4, ease: "sine.inOut" }, 0);
+
+    window.__timelines = { "main": tl };
+    tl.seek(0);
+  </script>
+</body>
+</html>

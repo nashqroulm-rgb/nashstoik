@@ -232,18 +232,18 @@ export const StoicShorts: React.FC<StoicShortsProps> = ({
                 marginBottom: 6,
               }}
             >
-              ⚖️ PRINSIP DASAR STOIKISME
+              🏛️ NASEHAT MENTOR STOIK
             </div>
             <div
               style={{
-                fontSize: 19,
+                fontSize: 18,
                 fontWeight: 800,
                 color: "#ffffff",
                 lineHeight: 1.35,
                 letterSpacing: 0.2,
               }}
             >
-              {title}
+              "Pernahkah pikiranmu sesak mikirin omongan orang?"
             </div>
           </div>
         </div>

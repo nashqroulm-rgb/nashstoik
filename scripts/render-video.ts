@@ -52,10 +52,10 @@ async function main() {
   // HyperFrames clip sequence
   const scenes = [
     {
-      scene_id: "SCENE_01_HYPERFRAMES_COMPASS",
+      scene_id: "SCENE_01_HYPERFRAMES_PILLARS",
       timeStart: 0,
       timeEnd: audioDuration + 1.5,
-      videoSrc: "hyperframes_dichotomy_compass.mp4",
+      videoSrc: "hyperframes_dichotomy_clean.mp4",
     },
   ];
 

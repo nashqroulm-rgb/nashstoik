@@ -2,45 +2,21 @@
   "day": 1,
   "week": 1,
   "theme": "Hukum Dikotomi Kendali (The Dichotomy of Control)",
-  "philosopher": "Epictetus",
-  "title": "Hukum Dikotomi Kendali: Rahasia Hati Baja Epictetus",
-  "meta_title": "Hukum Dikotomi Kendali: Rahasia Hati Baja Epictetus #Shorts",
-  "hook": "Berhenti menyiksa dirimu atas hal yang tak bisa kau kendalikan!",
-  "script": "Berhenti menyiksa dirimu atas hal yang tak bisa kau kendalikan! Dua ribu tahun lalu, Epictetus membocorkan rahasia ketenangan mutlak: bagi hidupmu menjadi dua lingkaran. Lingkaran pertama: hal di luar kuasamu. Opini bos, gosip rekan kerja, hasil investasi, dan masa lalu. Mencemaskannya adalah kebodohan paling menyiksa. Lingkaran kedua: hal seratus persen dalam kendalimu. Pikiranmu, respon emosimu, dan usahamu hari ini. Mulai sekarang, setiap kali cemas melanda dada, tanyakan satu hal: apakah ini dalam kendaliku? Jika bukan, buang tanpa penyesalan dan tenanglah.",
-  "script_word_count": 86,
-  "estimated_duration_seconds": 46.5,
+  "philosopher": "Epictetus & Marcus Aurelius",
+  "title": "Bagi Bebanmu Jadi Dua: Rahasia Ketenangan Batin",
+  "meta_title": "Bagi Bebanmu Jadi Dua: Rahasia Ketenangan Stoik #Shorts",
+  "hook": "Pernah nggak, malam-malam sebelum tidur, pikiranmu tiba-tiba sesak cuma gara-gara mikirin omongan orang tadi siang?",
+  "script": "Pernah nggak, malam-malam sebelum tidur, pikiranmu tiba-tiba sesak cuma gara-gara mikirin omongan orang tadi siang? Tarik napas sebentar kawan. Biar kuberi tahu satu hal: kamu lelah bukan karena hidupmu seberat itu. Tapi karena kamu sedang memikul hal-hal yang dari awal bukan kuasamu. Mulai sekarang, bagi bebanmu jadi dua. Yang pertama: hal di luar kendalimu. Opini orang lain, hasil masa depan, dan masa lalu. Itu bukan tugasmu, lepaskan. Yang kedua: hal di tanganmu. Bagaimana kamu merespon masalah, caramu menjaga diri, dan usahamu esok pagi. Fokuskan energimu di situ saja. Jangan biarkan ombak di luar menenggelamkan ketenangan perahumu. Ingat ini baik-baik, terutama di saat:",
+  "script_word_count": 102,
+  "estimated_duration_seconds": 51.6,
   "scenes": [
     {
-      "scene_id": "scene_01_hook",
+      "scene_id": "SCENE_01_HYPERFRAMES_PILLARS",
       "timeStart": 0,
-      "timeEnd": 6.5,
-      "type": "broll",
-      "visual_description": "Cinematic statue bust of a stoic philosopher, dark chiaroscuro lighting, moody slate atmosphere",
-      "videoSrc": "broll_cliff_ocean.mp4"
-    },
-    {
-      "scene_id": "scene_02_hyperframes_compass",
-      "timeStart": 6.5,
-      "timeEnd": 24.0,
+      "timeEnd": 53.5,
       "type": "hyperframes",
-      "visual_description": "HyperFrames dynamic vector animation of the Stoic Dichotomy Compass, rotating outer ring fading, inner golden ring glowing",
-      "videoSrc": "hyperframes_dichotomy_compass.mp4"
-    },
-    {
-      "scene_id": "scene_03_mindset_focus",
-      "timeStart": 24.0,
-      "timeEnd": 38.0,
-      "type": "broll",
-      "visual_description": "Atmospheric lone resolute figure standing calmly amid stormy misty mountain ridge",
-      "videoSrc": "broll_misty_mountain.mp4"
-    },
-    {
-      "scene_id": "scene_04_resolution",
-      "timeStart": 38.0,
-      "timeEnd": 48.0,
-      "type": "broll",
-      "visual_description": "Chiaroscuro marble hands chiselling stone, warm golden rim lighting",
-      "videoSrc": "broll_marble_statue.mp4"
+      "visual_description": "Two clean balanced pillars: Left outer pillar (Let go), Right inner pillar (Focus here), with warm candlelight ambient glow",
+      "videoSrc": "hyperframes_dichotomy_clean.mp4"
     }
   ],
   "youtube": {
