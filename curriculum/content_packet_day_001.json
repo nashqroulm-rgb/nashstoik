@@ -11,12 +11,44 @@
   "estimated_duration_seconds": 51.6,
   "scenes": [
     {
-      "scene_id": "SCENE_01_HYPERFRAMES_PILLARS",
+      "scene_id": "SCENE_01_NIGHT_INSOMNIA",
       "timeStart": 0,
-      "timeEnd": 53.5,
+      "timeEnd": 9.0,
+      "type": "broll",
+      "visual_description": "Silhouetted lone person sitting on a dark room edge at night, candlelight, looking out large misty window",
+      "videoSrc": "broll/scene_01_night_insomnia.mp4"
+    },
+    {
+      "scene_id": "SCENE_02_RAIN_WINDOW",
+      "timeStart": 9.0,
+      "timeEnd": 18.5,
+      "type": "broll",
+      "visual_description": "Close-up of raindrops streaming down glass window at night, soft red city bokeh",
+      "videoSrc": "broll/scene_02_rain_window.mp4"
+    },
+    {
+      "scene_id": "SCENE_03_HYPERFRAMES_STOIC_WHISPER",
+      "timeStart": 18.5,
+      "timeEnd": 35.0,
       "type": "hyperframes",
-      "visual_description": "Two clean balanced pillars: Left outer pillar (Let go), Right inner pillar (Focus here), with warm candlelight ambient glow",
-      "videoSrc": "hyperframes_dichotomy_clean.mp4"
+      "visual_description": "HyperFrames cinematic floating golden cards: Di Luar Kuasamu vs Di Tanganmu, high contrast and atmospheric",
+      "videoSrc": "hyperframes_stoic_whisper.mp4"
+    },
+    {
+      "scene_id": "SCENE_04_COFFEE_STEAM",
+      "timeStart": 35.0,
+      "timeEnd": 44.5,
+      "type": "broll",
+      "visual_description": "Warm morning sunlight catching steam rising from a handcrafted ceramic mug, quiet peaceful atmosphere",
+      "videoSrc": "broll/scene_04_coffee_steam.mp4"
+    },
+    {
+      "scene_id": "SCENE_05_SUNRISE_HORIZON",
+      "timeStart": 44.5,
+      "timeEnd": 53.2,
+      "type": "broll",
+      "visual_description": "Silhouetted person from behind sitting and looking into radiant golden sunrise over open rolling countryside",
+      "videoSrc": "broll/scene_05_walking_sunrise.mp4"
     }
   ],
   "youtube": {

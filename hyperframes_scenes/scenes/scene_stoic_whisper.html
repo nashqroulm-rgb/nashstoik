@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=720, height=1280">
+  <title>NASH-03 HyperFrames: Dua Beban Pikiran</title>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      background: #03060a;
+      color: #f8fafc;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Georgia", serif;
+      overflow: hidden;
+      width: 720px;
+      height: 1280px;
+    }
+    #root {
+      position: relative;
+      width: 720px;
+      height: 1280px;
+      overflow: hidden;
+      background: radial-gradient(circle at 50% 38%, #0f1722 0%, #060a10 65%, #020406 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 50px 40px;
+    }
+    /* Soft atmospheric embers & glow */
+    .glow-core {
+      position: absolute;
+      width: 520px;
+      height: 520px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(212, 175, 55, 0.18) 0%, rgba(217, 119, 6, 0.06) 45%, transparent 70%);
+      top: 240px;
+      left: 100px;
+      filter: blur(65px);
+      pointer-events: none;
+    }
+    /* Floating Dust Motes */
+    .particle {
+      position: absolute;
+      border-radius: 50%;
+      background: #d4af37;
+      opacity: 0.3;
+      pointer-events: none;
+    }
+    /* Cards Stack */
+    .cards-stack {
+      width: 100%;
+      max-width: 640px;
+      display: flex;
+      flex-direction: column;
+      gap: 36px;
+      z-index: 10;
+      margin-top: -45px;
+    }
+    /* Common Atmospheric Card */
+    .stoic-card {
+      border-radius: 26px;
+      padding: 36px 32px;
+      backdrop-filter: blur(20px);
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      position: relative;
+      box-shadow: 0 24px 50px rgba(0, 0, 0, 0.7);
+    }
+    /* Card 1: Di Luar Kendalimu */
+    .card-outer {
+      background: rgba(15, 23, 38, 0.75);
+      border: 1.5px solid rgba(148, 163, 184, 0.3);
+    }
+    .card-outer .row-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .card-outer .tag {
+      background: rgba(100, 116, 139, 0.3);
+      color: #94a3b8;
+      border: 1px solid rgba(148, 163, 184, 0.35);
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 2px;
+      padding: 6px 16px;
+      border-radius: 9999px;
+    }
+    .card-outer .title {
+      font-size: 26px;
+      font-weight: 800;
+      color: #cbd5e1;
+      letter-spacing: 0.5px;
+    }
+    /* Card 2: Dalam Kendalimu (Emas Bernapas) */
+    .card-inner {
+      background: rgba(22, 32, 48, 0.94);
+      border: 2px solid rgba(212, 175, 55, 0.7);
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.75), 0 0 40px rgba(212, 175, 55, 0.22);
+    }
+    .card-inner .row-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .card-inner .tag {
+      background: rgba(212, 175, 55, 0.25);
+      color: #fef08a;
+      border: 1px solid rgba(212, 175, 55, 0.6);
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 2px;
+      padding: 6px 18px;
+      border-radius: 9999px;
+    }
+    .card-inner .title {
+      font-size: 27px;
+      font-weight: 800;
+      color: #fef08a;
+      letter-spacing: 0.5px;
+    }
+    /* Items Flow */
+    .items-flow {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .chip {
+      padding: 12px 20px;
+      border-radius: 14px;
+      font-size: 19px;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .card-outer .chip {
+      background: rgba(30, 41, 59, 0.8);
+      color: #cbd5e1;
+      border: 1px solid rgba(148, 163, 184, 0.2);
+    }
+    .card-inner .chip {
+      background: rgba(212, 175, 55, 0.2);
+      color: #ffffff;
+      border: 1.5px solid rgba(212, 175, 55, 0.5);
+    }
+  </style>
+</head>
+<body>
+  <div id="root" data-composition-id="main" data-duration="16">
+    <div class="glow-core" id="glowCore"></div>
+
+    <div class="cards-stack">
+      <!-- Card 1: Di Luar Kendalimu -->
+      <div class="stoic-card card-outer" id="cardOuter">
+        <div class="row-top">
+          <div class="title">1. DI LUAR KUASAMU</div>
+          <div class="tag">LEPASKAN</div>
+        </div>
+        <div class="items-flow">
+          <span class="chip">✕ Opini Orang Lain</span>
+          <span class="chip">✕ Masa Lalu</span>
+          <span class="chip">✕ Hasil Masa Depan</span>
+        </div>
+      </div>
+
+      <!-- Card 2: Di Tanganmu -->
+      <div class="stoic-card card-inner" id="cardInner">
+        <div class="row-top">
+          <div class="title">2. DI TANGANMU</div>
+          <div class="tag">FOKUS DI SINI</div>
+        </div>
+        <div class="items-flow">
+          <span class="chip">✓ Respon Emosimu</span>
+          <span class="chip">✓ Menjaga Dirimu</span>
+          <span class="chip">✓ Usahamu Esok Pagi</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const tl = gsap.timeline({ paused: true });
+
+    tl.from("#cardOuter", { y: -45, opacity: 0, duration: 0.9, ease: "power2.out" })
+      .from("#cardInner", { y: 45, opacity: 0, duration: 0.9, ease: "power2.out" }, "-=0.4")
+      .to("#cardOuter", { opacity: 0.65, scale: 0.98, duration: 1.2, ease: "power1.inOut" }, "+=2.0")
+      .to("#cardInner", { scale: 1.03, boxShadow: "0 28px 65px rgba(212, 175, 55, 0.35)", duration: 1.2, ease: "power1.inOut" }, "<")
+      .to("#glowCore", { scale: 1.2, opacity: 0.85, duration: 2.5, yoyo: true, repeat: 4, ease: "sine.inOut" }, 0);
+
+    window.__timelines = { "main": tl };
+    tl.seek(0);
+  </script>
+</body>
+</html>

@@ -49,31 +49,37 @@ async function main() {
   // +1.5s cushion buffer for outro (Rule 45)
   const durationInFrames = Math.ceil((audioDuration + 1.5) * fps);
 
-  // 4-Scene Cinematic Sequence (Multi-Scene Pacing)
+  // 5-Scene Atmospheric Human Realism Sequence (Faceless)
   const scenes = [
     {
-      scene_id: "SCENE_01_BUST_HOOK",
+      scene_id: "SCENE_01_NIGHT_INSOMNIA",
       timeStart: 0,
-      timeEnd: 11.0,
-      videoSrc: "scene_01_bust.mp4",
+      timeEnd: 9.0,
+      videoSrc: "broll/scene_01_night_insomnia.mp4",
     },
     {
-      scene_id: "SCENE_02_MOUNTAIN_MIST",
-      timeStart: 11.0,
-      timeEnd: 21.5,
-      videoSrc: "scene_02_mountain.mp4",
+      scene_id: "SCENE_02_RAIN_WINDOW",
+      timeStart: 9.0,
+      timeEnd: 18.5,
+      videoSrc: "broll/scene_02_rain_window.mp4",
     },
     {
-      scene_id: "SCENE_03_HYPERFRAMES_BOXES",
-      timeStart: 21.5,
-      timeEnd: 38.0,
-      videoSrc: "hyperframes_dichotomy_boxes.mp4",
+      scene_id: "SCENE_03_HYPERFRAMES_STOIC_WHISPER",
+      timeStart: 18.5,
+      timeEnd: 35.0,
+      videoSrc: "hyperframes_stoic_whisper.mp4",
     },
     {
-      scene_id: "SCENE_04_BUST_RESOLUTION",
-      timeStart: 38.0,
+      scene_id: "SCENE_04_COFFEE_STEAM",
+      timeStart: 35.0,
+      timeEnd: 44.5,
+      videoSrc: "broll/scene_04_coffee_steam.mp4",
+    },
+    {
+      scene_id: "SCENE_05_SUNRISE_HORIZON",
+      timeStart: 44.5,
       timeEnd: audioDuration + 1.5,
-      videoSrc: "scene_04_bust_return.mp4",
+      videoSrc: "broll/scene_05_walking_sunrise.mp4",
     },
   ];
 
