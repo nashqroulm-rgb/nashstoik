@@ -24,16 +24,16 @@ async function main() {
   fs.mkdirSync(path.dirname(path.resolve(outputPath)), { recursive: true });
 
   const script = packet.script || "";
-  const audioFile = `voiceover_day_${String(dayNum).padStart(3, "0")}.mp3`;
+  // Use user's authentic narration if available
+  const userAudio = "voiceover_user.mp3";
+  const defaultAudio = `voiceover_day_${String(dayNum).padStart(3, "0")}.mp3`;
+  const audioFile = fs.existsSync(path.resolve("public", userAudio)) ? userAudio : defaultAudio;
   const audioPath = path.resolve("public", audioFile);
 
-  if (!fs.existsSync(audioPath)) {
-    console.log(`[Audio] File ${audioFile} belum ada. Menjalankan scripts/generate-voiceover.py...`);
-    execSync(`python scripts/generate-voiceover.py`, { stdio: "inherit" });
-  }
+  console.log(`[Audio] Using audio: ${audioFile} (${audioPath})`);
 
-  // Ukur durasi audio riil via ffprobe (Rule 1: Dynamic Duration Invariant)
-  let audioDuration = 45;
+  // Measure audio duration via ffprobe
+  let audioDuration = 50.6;
   try {
     const probe = execSync(
       `ffprobe -v error -show_entries format=duration -of csv=p=0 "${audioPath}"`,
@@ -42,43 +42,51 @@ async function main() {
     audioDuration = parseFloat(probe);
     console.log(`[Audio] Durasi audio terukur: ${audioDuration.toFixed(2)} detik`);
   } catch (e) {
-    console.warn(`[Audio] Warning ffprobe: ${e}, fallback to 45s`);
+    console.warn(`[Audio] Warning ffprobe: ${e}, fallback to 50.6s`);
   }
 
   const fps = 24;
-  // +1.5s cushion buffer for outro (Rule 45)
-  const durationInFrames = Math.ceil((audioDuration + 1.5) * fps);
+  // +1.4s cushion buffer for outro and seamless looping (Rule 48)
+  const durationInFrames = Math.ceil((audioDuration + 1.4) * fps);
 
-  // 5-Scene Atmospheric Human Realism Sequence (Faceless)
+  // Load Timed Subtitles
+  const subFile = path.resolve("curriculum/subtitles_user_001.json");
+  let timedSubtitles = [];
+  if (fs.existsSync(subFile)) {
+    timedSubtitles = JSON.parse(fs.readFileSync(subFile, "utf-8"));
+    console.log(`[Subtitles] Loaded ${timedSubtitles.length} timed subtitle cues.`);
+  }
+
+  // 5-Scene Atmospheric Human Realism Sequence (Faceless + Ethereal HyperFrames)
   const scenes = [
     {
       scene_id: "SCENE_01_NIGHT_INSOMNIA",
       timeStart: 0,
-      timeEnd: 9.0,
+      timeEnd: 11.4,
       videoSrc: "broll/scene_01_night_insomnia.mp4",
     },
     {
       scene_id: "SCENE_02_RAIN_WINDOW",
-      timeStart: 9.0,
-      timeEnd: 18.5,
+      timeStart: 11.4,
+      timeEnd: 20.7,
       videoSrc: "broll/scene_02_rain_window.mp4",
     },
     {
-      scene_id: "SCENE_03_HYPERFRAMES_STOIC_WHISPER",
-      timeStart: 18.5,
-      timeEnd: 35.0,
-      videoSrc: "hyperframes_stoic_whisper.mp4",
+      scene_id: "SCENE_03_HYPERFRAMES_ETHEREAL",
+      timeStart: 20.7,
+      timeEnd: 36.6,
+      videoSrc: "hyperframes_stoic_ethereal.mp4",
     },
     {
       scene_id: "SCENE_04_COFFEE_STEAM",
-      timeStart: 35.0,
-      timeEnd: 44.5,
+      timeStart: 36.6,
+      timeEnd: 45.5,
       videoSrc: "broll/scene_04_coffee_steam.mp4",
     },
     {
       scene_id: "SCENE_05_SUNRISE_HORIZON",
-      timeStart: 44.5,
-      timeEnd: audioDuration + 1.5,
+      timeStart: 45.5,
+      timeEnd: audioDuration + 1.4,
       videoSrc: "broll/scene_05_walking_sunrise.mp4",
     },
   ];
@@ -88,6 +96,7 @@ async function main() {
     channelHandle: "@nashstoik",
     title: packet.title || "Hukum Dikotomi Kendali: Rahasia Hati Baja Epictetus",
     script,
+    timedSubtitles,
     audioFile,
     bgmFile: "bgm_stoic_ambient.mp3",
     scenes,
@@ -138,21 +147,21 @@ async function main() {
         "--disable-setuid-sandbox",
         "--use-gl=angle",
         "--use-angle=d3d11",
-        "--enable-gpu-rasterization",
       ],
-    } as any,
-    concurrency: 4,
-    onProgress: ({ progress }) => {
-      process.stdout.write(`\r[Remotion] Progress: ${(progress * 100).toFixed(0)}%`);
+    },
+    concurrency: 1,
+    onProgress: ({ renderedFrames, encodedFrames }) => {
+      const pct = Math.round((renderedFrames / durationInFrames) * 100);
+      if (renderedFrames % 120 === 0 || renderedFrames === durationInFrames) {
+        process.stdout.write(`\r[Remotion] Render Progress: ${pct}% (${renderedFrames}/${durationInFrames} frames)`);
+      }
     },
   });
 
-  console.log(`\n[Remotion] Render complete -> ${outputPath}`);
-  const stat = fs.statSync(outputPath);
-  console.log(`[Remotion] Final MP4 Size: ${(stat.size / (1024 * 1024)).toFixed(2)} MB`);
+  console.log(`\n[Remotion] Master video successfully rendered to: ${outputPath}`);
 }
 
 main().catch((err) => {
-  console.error("[Remotion] Error:", err);
+  console.error("Fatal render error:", err);
   process.exit(1);
 });
