@@ -1,0 +1,54 @@
+{
+  "day": 3,
+  "title": "Benteng Hening: Menarik Diri dari Era Kebisingan",
+  "concept": "Inner Citadel (Marcus Aurelius)",
+  "script": "Berapa kali hari ini jarimu otomatis buka media sosial, cuma buat merasa makin tertinggal dari orang lain? Tarik napas sebentar kawan. Sadari satu hal sederhana ini: pikiranmu berantakan bukan karena pekerjaanmu terlalu banyak. Tapi karena kamu membiarkan ribuan suara asing masuk mengacak-acak kepalamu. Marcus Aurelius pernah mengingatkan: kamu punya kekuatan untuk menarik diri ke dalam keheningan batinmu sendiri, kapan saja kamu mau. Malam ini, matikan layarmu setengah jam lebih awal. Duduk diam, dan dengarkan suaramu sendiri. Ketenangan bukanlah tempat yang kamu kunjungi, melainkan benteng yang kamu rawat. Terutama di saat:",
+  "scenes": [
+    {
+      "scene_id": "SCENE_01_PHONE_FATIGUE",
+      "timeStart": 0,
+      "timeEnd": 10.0,
+      "type": "broll",
+      "videoSrc": "broll/scene_01_night_insomnia.mp4"
+    },
+    {
+      "scene_id": "SCENE_02_RAIN_DROP",
+      "timeStart": 10.0,
+      "timeEnd": 19.5,
+      "type": "broll",
+      "videoSrc": "broll/scene_02_rain_window.mp4"
+    },
+    {
+      "scene_id": "SCENE_03_HYPERFRAMES_ETHEREAL",
+      "timeStart": 19.5,
+      "timeEnd": 36.0,
+      "type": "hyperframes",
+      "videoSrc": "hyperframes_stoic_ethereal.mp4"
+    },
+    {
+      "scene_id": "SCENE_04_STEAM_CUP",
+      "timeStart": 36.0,
+      "timeEnd": 43.5,
+      "type": "broll",
+      "videoSrc": "broll/scene_04_coffee_steam.mp4"
+    },
+    {
+      "scene_id": "SCENE_05_OPEN_HORIZON",
+      "timeStart": 43.5,
+      "timeEnd": 51.5,
+      "type": "broll",
+      "videoSrc": "broll/scene_05_walking_sunrise.mp4"
+    }
+  ],
+  "metadata": {
+    "tags": [
+      "#marcusaurelius",
+      "#detoksdopamin",
+      "#stoikisme",
+      "#ketenanganbatin",
+      "#mentalpeace",
+      "#shorts"
+    ],
+    "caption": "Ketenangan bukanlah tempat yang kau kunjungi, melainkan benteng batin yang kau rawat. 🏛️🌿 #nashstoik #innercitadel"
+  }
+}

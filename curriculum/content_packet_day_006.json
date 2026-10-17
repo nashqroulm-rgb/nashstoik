@@ -1,0 +1,54 @@
+{
+  "day": 6,
+  "title": "Memento Mori: Mengingat Kematian untuk Menghapus Drama",
+  "concept": "Memento Mori (Marcus Aurelius & Seneca)",
+  "script": "Coba renungkan: masalah yang bikin kamu stres setengah mati hari ini, apakah masih penting sepuluh tahun lagi? Tarik napas kawan. Pandang langit malam sebentar. Marcus Aurelius menulis pada dirinya sendiri: Kamu bisa saja meninggalkan kehidupan ini sekarang juga. Biarkan kesadaran itu menentukan apa yang kamu pikirkan dan perbuat. Memento Mori bukan untuk membuatmu takut mati, tapi untuk membuatmu benar-benar hidup. Hidup ini terlalu singkat untuk dihabiskan mendendam, mengejar validasi semu, atau meratapi hal sepele. Kembalilah ke hal yang esensial. Hiduplah dengan tulus hari ini, terutama saat:",
+  "scenes": [
+    {
+      "scene_id": "SCENE_01_DEEP_NIGHT",
+      "timeStart": 0,
+      "timeEnd": 10.0,
+      "type": "broll",
+      "videoSrc": "broll/scene_01_night_insomnia.mp4"
+    },
+    {
+      "scene_id": "SCENE_02_RAIN_STILLNESS",
+      "timeStart": 10.0,
+      "timeEnd": 19.0,
+      "type": "broll",
+      "videoSrc": "broll/scene_02_rain_window.mp4"
+    },
+    {
+      "scene_id": "SCENE_03_HYPERFRAMES_ETHEREAL",
+      "timeStart": 19.0,
+      "timeEnd": 35.5,
+      "type": "hyperframes",
+      "videoSrc": "hyperframes_stoic_ethereal.mp4"
+    },
+    {
+      "scene_id": "SCENE_04_QUIET_MUG",
+      "timeStart": 35.5,
+      "timeEnd": 43.0,
+      "type": "broll",
+      "videoSrc": "broll/scene_04_coffee_steam.mp4"
+    },
+    {
+      "scene_id": "SCENE_05_HORIZON_LIGHT",
+      "timeStart": 43.0,
+      "timeEnd": 51.0,
+      "type": "broll",
+      "videoSrc": "broll/scene_05_walking_sunrise.mp4"
+    }
+  ],
+  "metadata": {
+    "tags": [
+      "#mementomori",
+      "#stoikisme",
+      "#waktu",
+      "#seneca",
+      "#hidupbermakna",
+      "#shorts"
+    ],
+    "caption": "Hidup ini terlalu singkat untuk dihabiskan mendendam atau meratapi hal sepele. Hiduplah hari ini. 🏛️⏳ #nashstoik #mementomori"
+  }
+}

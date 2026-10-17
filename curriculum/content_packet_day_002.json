@@ -1,0 +1,55 @@
+{
+  "day": 2,
+  "title": "Premeditatio Malorum: Latihan Mental Hadapi Hal Terburuk",
+  "concept": "Premeditatio Malorum (Seneca)",
+  "script": "Pernah nggak kamu seharian cemas, takut dipecat, takut gagal, atau takut ditinggalkan orang? Tarik napas sebentar kawan. Filsuf Seneca punya satu latihan rahasia. Namanya Premeditatio Malorum: membayangkan skenario terburuk secara sengaja. Bukan untuk bikin kamu putus asa, tapi untuk bertanya pada dirimu sendiri: Seandainya hal terburuk itu benar-benar terjadi besok pagi... apa aku sungguh akan hancur? Jawabannya hampir selalu: tidak. Jiwamu jauh lebih liat dari yang kamu duga. Kita seringkali menderita lebih banyak di dalam imajinasi, ketimbang di dalam kenyataan. Ingat ini baik-baik, terutama di saat:",
+  "scenes": [
+    {
+      "scene_id": "SCENE_01_ANXIETY_EVENING",
+      "timeStart": 0,
+      "timeEnd": 10.5,
+      "type": "broll",
+      "videoSrc": "broll/scene_01_night_insomnia.mp4"
+    },
+    {
+      "scene_id": "SCENE_02_RAIN_CONTEMPLATION",
+      "timeStart": 10.5,
+      "timeEnd": 20.0,
+      "type": "broll",
+      "videoSrc": "broll/scene_02_rain_window.mp4"
+    },
+    {
+      "scene_id": "SCENE_03_HYPERFRAMES_ETHEREAL",
+      "timeStart": 20.0,
+      "timeEnd": 36.5,
+      "type": "hyperframes",
+      "videoSrc": "hyperframes_stoic_ethereal.mp4"
+    },
+    {
+      "scene_id": "SCENE_04_WARM_MUG",
+      "timeStart": 36.5,
+      "timeEnd": 44.0,
+      "type": "broll",
+      "videoSrc": "broll/scene_04_coffee_steam.mp4"
+    },
+    {
+      "scene_id": "SCENE_05_SUNRISE_CALM",
+      "timeStart": 44.0,
+      "timeEnd": 52.0,
+      "type": "broll",
+      "videoSrc": "broll/scene_05_walking_sunrise.mp4"
+    }
+  ],
+  "metadata": {
+    "tags": [
+      "#stoikisme",
+      "#ketahananmental",
+      "#seneca",
+      "#overthinking",
+      "#filosofistoik",
+      "#mindset",
+      "#shorts"
+    ],
+    "caption": "Kita lebih sering menderita dalam imajinasi daripada kenyataan. Latih mentalmu sebelum badai datang. 🏛️⚓ #nashstoik #stoikisme"
+  }
+}

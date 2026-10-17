@@ -7,14 +7,19 @@ import { renderMedia, selectComposition } from "@remotion/renderer";
 async function main() {
   const args = process.argv.slice(2);
   let dayNum = 1;
-  let outputPath = "output/nash_stoik_day_001_master.mp4";
+  let outputPath = "";
 
   for (let i = 0; i < args.length; i++) {
     if (args[i] === "--day" && args[i + 1]) dayNum = Number(args[i + 1]);
     if (args[i] === "--out" && args[i + 1]) outputPath = args[i + 1];
   }
 
-  const packetFile = path.resolve(`curriculum/content_packet_day_${String(dayNum).padStart(3, "0")}.json`);
+  const dayStr = String(dayNum).padStart(3, "0");
+  if (!outputPath) {
+    outputPath = `output/nash_stoik_day_${dayStr}_master.mp4`;
+  }
+
+  const packetFile = path.resolve(`curriculum/content_packet_day_${dayStr}.json`);
   if (!fs.existsSync(packetFile)) {
     console.error(`Error: Packet file not found: ${packetFile}`);
     process.exit(1);
@@ -24,12 +29,23 @@ async function main() {
   fs.mkdirSync(path.dirname(path.resolve(outputPath)), { recursive: true });
 
   const script = packet.script || "";
-  // Use user's authentic narration if available
-  const userAudio = "voiceover_user.mp3";
-  const defaultAudio = `voiceover_day_${String(dayNum).padStart(3, "0")}.mp3`;
-  const audioFile = fs.existsSync(path.resolve("public", userAudio)) ? userAudio : defaultAudio;
-  const audioPath = path.resolve("public", audioFile);
+  
+  // Dynamic audio resolution (owner authentic voiceover takes priority)
+  const candidateAudios = [
+    `voiceover_user_${dayStr}.mp3`,
+    dayNum === 1 ? "voiceover_user.mp3" : "",
+    `voiceover_day_${dayStr}.mp3`,
+  ].filter(Boolean);
 
+  let audioFile = candidateAudios[0];
+  for (const c of candidateAudios) {
+    if (fs.existsSync(path.resolve("public", c))) {
+      audioFile = c;
+      break;
+    }
+  }
+
+  const audioPath = path.resolve("public", audioFile);
   console.log(`[Audio] Using audio: ${audioFile} (${audioPath})`);
 
   // Measure audio duration via ffprobe
@@ -46,50 +62,69 @@ async function main() {
   }
 
   const fps = 24;
-  // +1.4s cushion buffer for outro and seamless looping (Rule 48)
+  // +1.4s cushion buffer for outro and seamless looping
   const durationInFrames = Math.ceil((audioDuration + 1.4) * fps);
 
-  // Load Timed Subtitles
-  const subFile = path.resolve("curriculum/subtitles_user_001.json");
+  // Load Timed Subtitles (synchronized word/phrase cues)
+  const candidateSubs = [
+    `curriculum/subtitles_user_${dayStr}.json`,
+    dayNum === 1 ? "curriculum/subtitles_user_001.json" : "",
+  ].filter(Boolean);
+
   let timedSubtitles = [];
-  if (fs.existsSync(subFile)) {
-    timedSubtitles = JSON.parse(fs.readFileSync(subFile, "utf-8"));
-    console.log(`[Subtitles] Loaded ${timedSubtitles.length} timed subtitle cues.`);
+  for (const s of candidateSubs) {
+    const p = path.resolve(s);
+    if (fs.existsSync(p)) {
+      timedSubtitles = JSON.parse(fs.readFileSync(p, "utf-8"));
+      console.log(`[Subtitles] Loaded ${timedSubtitles.length} timed subtitle cues from ${s}`);
+      break;
+    }
   }
 
   // 5-Scene Atmospheric Human Realism Sequence (Faceless + Ethereal HyperFrames)
-  const scenes = [
-    {
-      scene_id: "SCENE_01_NIGHT_INSOMNIA",
-      timeStart: 0,
-      timeEnd: 11.4,
-      videoSrc: "broll/scene_01_night_insomnia.mp4",
-    },
-    {
-      scene_id: "SCENE_02_RAIN_WINDOW",
-      timeStart: 11.4,
-      timeEnd: 20.7,
-      videoSrc: "broll/scene_02_rain_window.mp4",
-    },
-    {
-      scene_id: "SCENE_03_HYPERFRAMES_ETHEREAL",
-      timeStart: 20.7,
-      timeEnd: 36.6,
-      videoSrc: "hyperframes_stoic_ethereal.mp4",
-    },
-    {
-      scene_id: "SCENE_04_COFFEE_STEAM",
-      timeStart: 36.6,
-      timeEnd: 45.5,
-      videoSrc: "broll/scene_04_coffee_steam.mp4",
-    },
-    {
-      scene_id: "SCENE_05_SUNRISE_HORIZON",
-      timeStart: 45.5,
-      timeEnd: audioDuration + 1.4,
-      videoSrc: "broll/scene_05_walking_sunrise.mp4",
-    },
-  ];
+  let scenes = packet.scenes;
+  if (!scenes || scenes.length === 0) {
+    // Default 5-Scene Calibrated Sequence
+    const t0 = 0;
+    const t1 = audioDuration * 0.22;
+    const t2 = audioDuration * 0.40;
+    const t3 = audioDuration * 0.72;
+    const t4 = audioDuration * 0.88;
+    const t5 = audioDuration + 1.4;
+
+    scenes = [
+      {
+        scene_id: "SCENE_01_NIGHT_INSOMNIA",
+        timeStart: t0,
+        timeEnd: t1,
+        videoSrc: "broll/scene_01_night_insomnia.mp4",
+      },
+      {
+        scene_id: "SCENE_02_RAIN_WINDOW",
+        timeStart: t1,
+        timeEnd: t2,
+        videoSrc: "broll/scene_02_rain_window.mp4",
+      },
+      {
+        scene_id: "SCENE_03_HYPERFRAMES_ETHEREAL",
+        timeStart: t2,
+        timeEnd: t3,
+        videoSrc: "hyperframes_stoic_ethereal.mp4",
+      },
+      {
+        scene_id: "SCENE_04_COFFEE_STEAM",
+        timeStart: t3,
+        timeEnd: t4,
+        videoSrc: "broll/scene_04_coffee_steam.mp4",
+      },
+      {
+        scene_id: "SCENE_05_SUNRISE_HORIZON",
+        timeStart: t4,
+        timeEnd: t5,
+        videoSrc: "broll/scene_05_walking_sunrise.mp4",
+      },
+    ];
+  }
 
   const inputProps = {
     channelName: "Nash Stoik",

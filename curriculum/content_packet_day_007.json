@@ -1,0 +1,55 @@
+{
+  "day": 7,
+  "title": "Evaluasi Malam: Jurnal Kejujuran Sebelum Tidur",
+  "concept": "Evening Examination (Seneca's Daily Review)",
+  "script": "Malam Minggu begini, sebelum kamu memejamkan mata, luangkan waktu dua menit untuk jujur pada dirimu sendiri. Jangan langsung tidur dengan pikiran kalut. Seneca punya kebiasaan setiap malam saat lampu padam: ia memeriksa seluruh harinya tanpa menghakimi. Tanyakan tiga hal sederhana ini: kesalahan apa yang tadi kubuat? Hal apa yang berhasil kuhadapi lebih baik? Dan apa yang bisa kulakukan esok pagi? Menjadi Stoik bukan berarti kamu tidak pernah berbuat salah. Menjadi Stoik berarti kamu tidak membiarkan kesalahan yang sama menjebak jiwamu dua kali. Maafkan dirimu malam ini, istirahatlah kawan, terutama saat:",
+  "scenes": [
+    {
+      "scene_id": "SCENE_01_BEDROOM_REVIEW",
+      "timeStart": 0,
+      "timeEnd": 10.5,
+      "type": "broll",
+      "videoSrc": "broll/scene_01_night_insomnia.mp4"
+    },
+    {
+      "scene_id": "SCENE_02_NIGHT_RAIN",
+      "timeStart": 10.5,
+      "timeEnd": 20.0,
+      "type": "broll",
+      "videoSrc": "broll/scene_02_rain_window.mp4"
+    },
+    {
+      "scene_id": "SCENE_03_HYPERFRAMES_ETHEREAL",
+      "timeStart": 20.0,
+      "timeEnd": 37.0,
+      "type": "hyperframes",
+      "videoSrc": "hyperframes_stoic_ethereal.mp4"
+    },
+    {
+      "scene_id": "SCENE_04_WARM_REST",
+      "timeStart": 37.0,
+      "timeEnd": 44.5,
+      "type": "broll",
+      "videoSrc": "broll/scene_04_coffee_steam.mp4"
+    },
+    {
+      "scene_id": "SCENE_05_PEACEFUL_DAWN",
+      "timeStart": 44.5,
+      "timeEnd": 53.5,
+      "type": "broll",
+      "videoSrc": "broll/scene_05_walking_sunrise.mp4"
+    }
+  ],
+  "metadata": {
+    "tags": [
+      "#evaluasidiri",
+      "#seneca",
+      "#stoikisme",
+      "#tidurnyenyak",
+      "#journaling",
+      "#mentalhealth",
+      "#shorts"
+    ],
+    "caption": "Maafkan dirimu malam ini. Menjadi Stoik berarti tidak membiarkan kesalahan yang sama menjebak jiwamu dua kali. 🏛️📖 #nashstoik #stoicreview"
+  }
+}

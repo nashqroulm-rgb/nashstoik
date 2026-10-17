@@ -1,0 +1,55 @@
+{
+  "day": 4,
+  "title": "Batu Tak Terluka: Seni Menghadapi Hinaan & Orang Toxic",
+  "concept": "The Invulnerable Stone (Epictetus)",
+  "script": "Sakit hati ya, dengar omongan menyindir dari rekan kerja atau orang terdekat tadi siang? Tarik napas kawan. Jangan buru-buru membalas dengan amarah. Epictetus pernah berkata: batu yang dilempari hinaan, tidak akan pernah terluka. Yang membuatmu sakit hati bukanlah kata-kata mereka, melainkan penilaianmu sendiri yang membenarkan hinaan itu. Jika seseorang menghinamu, anggap dia sedang menunjukkan isi hatinya yang sedang kacau, bukan nilai dirimu. Jangan biarkan kunci ketenangan rumahmu kamu serahkan ke saku orang lain yang bahkan tidak peduli padamu. Pegang kendali itu sendiri, terutama di saat:",
+  "scenes": [
+    {
+      "scene_id": "SCENE_01_HURT_NIGHT",
+      "timeStart": 0,
+      "timeEnd": 10.5,
+      "type": "broll",
+      "videoSrc": "broll/scene_01_night_insomnia.mp4"
+    },
+    {
+      "scene_id": "SCENE_02_RAIN_GLASS",
+      "timeStart": 10.5,
+      "timeEnd": 20.0,
+      "type": "broll",
+      "videoSrc": "broll/scene_02_rain_window.mp4"
+    },
+    {
+      "scene_id": "SCENE_03_HYPERFRAMES_ETHEREAL",
+      "timeStart": 20.0,
+      "timeEnd": 36.5,
+      "type": "hyperframes",
+      "videoSrc": "hyperframes_stoic_ethereal.mp4"
+    },
+    {
+      "scene_id": "SCENE_04_TEA_PEACE",
+      "timeStart": 36.5,
+      "timeEnd": 44.0,
+      "type": "broll",
+      "videoSrc": "broll/scene_04_coffee_steam.mp4"
+    },
+    {
+      "scene_id": "SCENE_05_SUNRISE_WALK",
+      "timeStart": 44.0,
+      "timeEnd": 52.5,
+      "type": "broll",
+      "videoSrc": "broll/scene_05_walking_sunrise.mp4"
+    }
+  ],
+  "metadata": {
+    "tags": [
+      "#epictetus",
+      "#orangtoxic",
+      "#stoikisme",
+      "#emosi",
+      "#selfcontrol",
+      "#mindset",
+      "#shorts"
+    ],
+    "caption": "Batu yang dilempari hinaan tak akan pernah terluka. Pegang sendiri kunci ketenangan batinmu. 🏛️🛡️ #nashstoik #stoik"
+  }
+}

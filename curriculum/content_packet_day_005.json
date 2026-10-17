@@ -1,0 +1,55 @@
+{
+  "day": 5,
+  "title": "Amor Fati: Menjadikan Badai Takdir Sebagai Jalan Baru",
+  "concept": "Amor Fati & The Obstacle is the Way",
+  "script": "Rencana besar yang kamu susun berbulan-bulan tiba-tiba berantakan total hari ini? Rasanya ingin marah dan menyalahkan keadaan, kan? Tarik napas sebentar kawan. Kaum Stoik punya prinsip bernama Amor Fati: cintai apa pun yang terjadi, betapapun pahitnya. Api yang besar tidak padam saat tertimpa kayu kering; ia justru membakar kayu itu dan menyala makin terang. Rintangan di depan jalanmu bukanlah akhir dari perjalanan. Rintangan itulah yang sekarang menjadi jalan barumu. Berhenti meratapi mengapa ini terjadi. Tanyakan pada dirimu: kebajikan apa yang bisa kulatih dari badai ini? Ingat ini, terutama saat:",
+  "scenes": [
+    {
+      "scene_id": "SCENE_01_CHAOS_NIGHT",
+      "timeStart": 0,
+      "timeEnd": 10.0,
+      "type": "broll",
+      "videoSrc": "broll/scene_01_night_insomnia.mp4"
+    },
+    {
+      "scene_id": "SCENE_02_RAIN_CITY",
+      "timeStart": 10.0,
+      "timeEnd": 19.5,
+      "type": "broll",
+      "videoSrc": "broll/scene_02_rain_window.mp4"
+    },
+    {
+      "scene_id": "SCENE_03_HYPERFRAMES_ETHEREAL",
+      "timeStart": 19.5,
+      "timeEnd": 36.0,
+      "type": "hyperframes",
+      "videoSrc": "hyperframes_stoic_ethereal.mp4"
+    },
+    {
+      "scene_id": "SCENE_04_COFFEE_WARMTH",
+      "timeStart": 36.0,
+      "timeEnd": 43.5,
+      "type": "broll",
+      "videoSrc": "broll/scene_04_coffee_steam.mp4"
+    },
+    {
+      "scene_id": "SCENE_05_GOLDEN_DAWN",
+      "timeStart": 43.5,
+      "timeEnd": 52.0,
+      "type": "broll",
+      "videoSrc": "broll/scene_05_walking_sunrise.mp4"
+    }
+  ],
+  "metadata": {
+    "tags": [
+      "#amorfati",
+      "#stoikisme",
+      "#bangkit",
+      "#mentalbaja",
+      "#filosofi",
+      "#marcusaurelius",
+      "#shorts"
+    ],
+    "caption": "Rintangan di jalanmu bukanlah akhir, melainkan jalan itu sendiri. Nyalakan apimu di tengah badai. 🏛️🔥 #nashstoik #amorfati"
+  }
+}
