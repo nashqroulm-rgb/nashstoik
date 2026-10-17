@@ -49,13 +49,31 @@ async function main() {
   // +1.5s cushion buffer for outro (Rule 45)
   const durationInFrames = Math.ceil((audioDuration + 1.5) * fps);
 
-  // HyperFrames clip sequence
+  // 4-Scene Cinematic Sequence (Multi-Scene Pacing)
   const scenes = [
     {
-      scene_id: "SCENE_01_HYPERFRAMES_PILLARS",
+      scene_id: "SCENE_01_BUST_HOOK",
       timeStart: 0,
+      timeEnd: 11.0,
+      videoSrc: "scene_01_bust.mp4",
+    },
+    {
+      scene_id: "SCENE_02_MOUNTAIN_MIST",
+      timeStart: 11.0,
+      timeEnd: 21.5,
+      videoSrc: "scene_02_mountain.mp4",
+    },
+    {
+      scene_id: "SCENE_03_HYPERFRAMES_BOXES",
+      timeStart: 21.5,
+      timeEnd: 38.0,
+      videoSrc: "hyperframes_dichotomy_boxes.mp4",
+    },
+    {
+      scene_id: "SCENE_04_BUST_RESOLUTION",
+      timeStart: 38.0,
       timeEnd: audioDuration + 1.5,
-      videoSrc: "hyperframes_dichotomy_clean.mp4",
+      videoSrc: "scene_04_bust_return.mp4",
     },
   ];
 

@@ -151,7 +151,7 @@ export const StoicShorts: React.FC<StoicShortsProps> = ({
       <div
         style={{
           position: "absolute",
-          top: 55,
+          top: 45,
           left: 0,
           right: 0,
           display: "flex",
@@ -165,11 +165,11 @@ export const StoicShorts: React.FC<StoicShortsProps> = ({
             display: "inline-flex",
             alignItems: "center",
             gap: 10,
-            background: "rgba(17, 24, 39, 0.9)",
-            border: "1px solid rgba(212, 175, 55, 0.5)",
+            background: "rgba(10, 15, 23, 0.85)",
+            border: "1px solid rgba(212, 175, 55, 0.4)",
             borderRadius: 9999,
             padding: "8px 22px",
-            boxShadow: "0 8px 32px rgba(0, 0, 0, 0.5)",
+            boxShadow: "0 8px 30px rgba(0, 0, 0, 0.6)",
             backdropFilter: "blur(10px)",
           }}
         >
@@ -186,70 +186,17 @@ export const StoicShorts: React.FC<StoicShortsProps> = ({
             style={{
               fontSize: 13,
               fontWeight: 700,
-              letterSpacing: 2,
+              letterSpacing: 2.5,
               textTransform: "uppercase",
-              color: "#f3f4f6",
+              color: "#e2e8f0",
             }}
           >
-            {channelName} • MENTAL TOUGHNESS
+            {channelName} • FILOSOFI STOIK
           </span>
         </div>
       </div>
 
-      {/* 5. Opening Shock Hook Pill (Detik 0 - 4.5) */}
-      {hookBannerOpacity > 0 && (
-        <div
-          style={{
-            position: "absolute",
-            top: 130,
-            left: 35,
-            right: 35,
-            zIndex: 45,
-            opacity: hookBannerOpacity,
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            textAlign: "center",
-          }}
-        >
-          <div
-            style={{
-              background: "rgba(17, 24, 39, 0.94)",
-              border: "1.5px solid #d4af37",
-              borderRadius: 18,
-              padding: "16px 22px",
-              boxShadow: "0 16px 40px rgba(0, 0, 0, 0.65)",
-              maxWidth: 580,
-            }}
-          >
-            <div
-              style={{
-                fontSize: 11,
-                fontWeight: 800,
-                color: "#d4af37",
-                letterSpacing: 2,
-                textTransform: "uppercase",
-                marginBottom: 6,
-              }}
-            >
-              🏛️ NASEHAT MENTOR STOIK
-            </div>
-            <div
-              style={{
-                fontSize: 18,
-                fontWeight: 800,
-                color: "#ffffff",
-                lineHeight: 1.35,
-                letterSpacing: 0.2,
-              }}
-            >
-              "Pernahkah pikiranmu sesak mikirin omongan orang?"
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* 6. Kinetic Subtitle Display (Positioned in Bottom Safe Zone) */}
+      {/* 5. Kinetic Subtitle Display (Positioned in Bottom Safe Zone) */}
       <div
         style={{
           position: "absolute",
@@ -403,10 +350,9 @@ export const StoicShorts: React.FC<StoicShortsProps> = ({
           position: "absolute",
           top: 0,
           left: 0,
-          height: 4,
+          height: 3,
           width: `${totalProgress * 100}%`,
           backgroundColor: "#d4af37",
-          boxShadow: "0 0 8px #d4af37",
           zIndex: 70,
         }}
       />

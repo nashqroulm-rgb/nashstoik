@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=720, height=1280">
+  <title>NASH-03 HyperFrames: Dua Kotak Beban Stoik</title>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      background: #05080e;
+      color: #f8fafc;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", serif;
+      overflow: hidden;
+      width: 720px;
+      height: 1280px;
+    }
+    #root {
+      position: relative;
+      width: 720px;
+      height: 1280px;
+      overflow: hidden;
+      background: radial-gradient(circle at 50% 40%, #111a26 0%, #080d14 60%, #030508 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 60px 45px;
+    }
+    /* Soft ambient gold glow */
+    .glow {
+      position: absolute;
+      width: 480px;
+      height: 480px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(212, 175, 55, 0.16) 0%, rgba(245, 158, 11, 0.05) 50%, transparent 70%);
+      top: 250px;
+      left: 120px;
+      filter: blur(60px);
+      pointer-events: none;
+    }
+    /* Stacked Boxes Container */
+    .stack-container {
+      width: 100%;
+      max-width: 650px;
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+      z-index: 10;
+      margin-top: -50px; /* Leave bottom safe zone clear for subtitles */
+    }
+    /* Common Box Style - BIG, CLEAN & READABLE */
+    .box {
+      border-radius: 24px;
+      padding: 34px 30px;
+      backdrop-filter: blur(16px);
+      box-shadow: 0 20px 45px rgba(0, 0, 0, 0.6);
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      position: relative;
+    }
+    /* Box 1: Di Luar Kendali (Muted Gray, Faded) */
+    .box-outer {
+      background: rgba(15, 23, 42, 0.85);
+      border: 2px solid rgba(148, 163, 184, 0.4);
+    }
+    .box-outer .header-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .box-outer .badge {
+      background: rgba(100, 116, 139, 0.35);
+      color: #cbd5e1;
+      border: 1px solid rgba(148, 163, 184, 0.45);
+      font-size: 14px;
+      font-weight: 800;
+      letter-spacing: 2px;
+      padding: 6px 16px;
+      border-radius: 9999px;
+    }
+    .box-outer .title {
+      font-size: 27px;
+      font-weight: 800;
+      color: #f1f5f9;
+      letter-spacing: 0.5px;
+    }
+    /* Box 2: Dalam Kendali (Radiant Gold, Sharp Focus) */
+    .box-inner {
+      background: rgba(22, 30, 44, 0.95);
+      border: 2.5px solid #d4af37;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7), 0 0 35px rgba(212, 175, 55, 0.25);
+    }
+    .box-inner .header-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .box-inner .badge {
+      background: rgba(212, 175, 55, 0.25);
+      color: #fef08a;
+      border: 1px solid rgba(212, 175, 55, 0.6);
+      font-size: 14px;
+      font-weight: 800;
+      letter-spacing: 2px;
+      padding: 6px 18px;
+      border-radius: 9999px;
+    }
+    .box-inner .title {
+      font-size: 28px;
+      font-weight: 800;
+      color: #fef08a;
+      letter-spacing: 0.5px;
+    }
+    /* Bullet Items inside Box - Minimal & High Contrast */
+    .items-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 4px;
+    }
+    .item-chip {
+      padding: 12px 18px;
+      border-radius: 14px;
+      font-size: 19px;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .box-outer .item-chip {
+      background: rgba(30, 41, 59, 0.85);
+      color: #e2e8f0;
+      border: 1px solid rgba(148, 163, 184, 0.25);
+    }
+    .box-inner .item-chip {
+      background: rgba(212, 175, 55, 0.22);
+      color: #fef08a;
+      border: 1.5px solid rgba(212, 175, 55, 0.5);
+    }
+  </style>
+</head>
+<body>
+  <div id="root" data-composition-id="main" data-duration="17">
+    <div class="glow" id="ambientGlow"></div>
+
+    <div class="stack-container">
+      <!-- Box 1: Di Luar Kendali -->
+      <div class="box box-outer" id="boxOuter">
+        <div class="header-row">
+          <div class="title">1. DI LUAR KENDALIMU</div>
+          <div class="badge">LEPASKAN</div>
+        </div>
+        <div class="items-row">
+          <span class="item-chip">✕ Opini Orang Lain</span>
+          <span class="item-chip">✕ Masa Lalu</span>
+          <span class="item-chip">✕ Hasil Masa Depan</span>
+        </div>
+      </div>
+
+      <!-- Box 2: Dalam Kendali -->
+      <div class="box box-inner" id="boxInner">
+        <div class="header-row">
+          <div class="title">2. DALAM KENDALIMU</div>
+          <div class="badge">FOKUS DI SINI</div>
+        </div>
+        <div class="items-row">
+          <span class="item-chip">✓ Respon Emosimu</span>
+          <span class="item-chip">✓ Menjaga Dirimu</span>
+          <span class="item-chip">✓ Usahamu Esok Pagi</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const tl = gsap.timeline({ paused: true });
+
+    tl.from("#boxOuter", { y: -50, opacity: 0, duration: 0.9, ease: "power2.out" })
+      .from("#boxInner", { y: 50, opacity: 0, duration: 0.9, ease: "power2.out" }, "-=0.4")
+      .to("#boxOuter", { opacity: 0.72, scale: 0.98, duration: 1.2, ease: "power1.inOut" }, "+=1.8")
+      .to("#boxInner", { scale: 1.04, boxShadow: "0 25px 60px rgba(212, 175, 55, 0.35)", duration: 1.2, ease: "power1.inOut" }, "<")
+      .to("#ambientGlow", { scale: 1.15, opacity: 0.8, duration: 2.5, yoyo: true, repeat: 4, ease: "sine.inOut" }, 0);
+
+    window.__timelines = { "main": tl };
+    tl.seek(0);
+  </script>
+</body>
+</html>
