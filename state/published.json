@@ -1,3 +1,18 @@
 {
-  "published": []
+  "published": [],
+  "027": {
+    "day": 27,
+    "day_str": "027",
+    "timestamp": "2026-10-18 08:54:22 UTC",
+    "zernio": {
+      "platform": "zernio",
+      "ok": true,
+      "postId": "6ad4894089d6c51e42f149c8",
+      "publicUrl": "https://media.zernio.com/temp/1792313662446_2udd0oh6_nash_stoik_day_027_compressed.mp4"
+    },
+    "youtube": {
+      "ok": false,
+      "status": "skipped_no_token"
+    }
+  }
 }
