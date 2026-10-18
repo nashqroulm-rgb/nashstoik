@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=1080, height=1920">
+  <title>NASH-03 HyperFrames: Day 019</title>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    html, body {
+      background: #020408;
+      color: #f8fafc;
+      font-family: -apple-system, BlinkMacSystemFont, "Georgia", "Playfair Display", serif;
+      overflow: hidden;
+      width: 1080px;
+      height: 1920px;
+    }
+    #root {
+      position: relative;
+      width: 1080px;
+      height: 1920px;
+      overflow: hidden;
+      background: radial-gradient(circle at 50% 46%, #0f1827 0%, #070b14 55%, #020306 100%);
+    }
+    .ambient-glow {
+      position: absolute;
+      width: 900px;
+      height: 900px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(212, 175, 55, 0.16) 0%, rgba(14, 165, 233, 0.05) 50%, transparent 75%);
+      top: 450px;
+      left: 90px;
+      filter: blur(100px);
+      pointer-events: none;
+    }
+    .safe-zone {
+      position: absolute;
+      top: 320px;
+      left: 80px;
+      right: 80px;
+      height: 1120px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 10;
+    }
+    .horizon-container {
+      width: 860px;
+      height: 2px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      pointer-events: none;
+      margin: 20px 0;
+    }
+    .horizon-line {
+      width: 100%;
+      height: 1.5px;
+      background: linear-gradient(90deg, transparent 0%, rgba(212, 175, 55, 0.65) 50%, transparent 100%);
+      box-shadow: 0 0 18px rgba(212, 175, 55, 0.6);
+    }
+    .horizon-diamond {
+      position: absolute;
+      width: 12px;
+      height: 12px;
+      background: #fef08a;
+      transform: rotate(45deg);
+      box-shadow: 0 0 16px #fef08a;
+    }
+    .realm-outer {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 16px;
+      width: 100%;
+      padding-top: 15px;
+    }
+    .realm-label-outer {
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: 4px;
+      color: #64748b;
+      text-transform: uppercase;
+    }
+    .title-outer {
+      font-size: 46px;
+      font-weight: 800;
+      letter-spacing: 2.5px;
+      color: #94a3b8;
+      text-transform: uppercase;
+      font-family: "Georgia", serif;
+    }
+    .items-outer {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 6px;
+    }
+    .item-smoke {
+      font-size: 24px;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      color: #64748b;
+      font-family: -apple-system, sans-serif;
+    }
+    .tag-dissolve {
+      margin-top: 10px;
+      font-size: 18px;
+      font-weight: 800;
+      letter-spacing: 3.5px;
+      color: #ef4444;
+      opacity: 0.85;
+      text-transform: uppercase;
+    }
+    .realm-inner {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 18px;
+      width: 100%;
+      padding-bottom: 10px;
+    }
+    .realm-label-inner {
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: 4px;
+      color: #d4af37;
+      text-transform: uppercase;
+    }
+    .title-inner {
+      font-size: 52px;
+      font-weight: 900;
+      letter-spacing: 3px;
+      background: linear-gradient(135deg, #ffffff 0%, #fef08a 40%, #d4af37 80%, #b45309 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-transform: uppercase;
+      font-family: "Georgia", serif;
+      filter: drop-shadow(0 0 30px rgba(212, 175, 55, 0.45));
+    }
+    .items-inner {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      margin-top: 4px;
+    }
+    .item-gold {
+      font-size: 26px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      color: #f8fafc;
+      font-family: -apple-system, sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+    }
+    .gold-bullet {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #fef08a;
+      box-shadow: 0 0 12px #fef08a;
+    }
+    .boat-container {
+      width: 170px;
+      height: 80px;
+      margin-top: 10px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .boat-svg {
+      width: 100%;
+      height: 100%;
+      overflow: visible;
+    }
+  </style>
+</head>
+<body>
+  <div id="root" data-composition-id="main" data-duration="16" data-width="1080" data-height="1920">
+    <div class="ambient-glow" id="ambientGlow"></div>
+
+    <div class="safe-zone">
+      <div class="realm-outer" id="realmOuter">
+        <div class="realm-label-outer">MERACUNI PIKIRAN</div>
+        <div class="title-outer">KELUHAN KOSONG</div>
+        <div class="items-outer" id="itemsOuter">
+          <div class="item-smoke">Panas Cuaca</div>\n          <div class="item-smoke">Tuntutan Pekerjaan</div>\n          <div class="item-smoke">Menguras Tenaga</div>
+        </div>
+        <div class="tag-dissolve" id="tagDissolve">— TAK UBAH KEADAAN —</div>
+      </div>
+
+      <div class="horizon-container" id="horizonContainer">
+        <div class="horizon-line"></div>
+        <div class="horizon-diamond"></div>
+      </div>
+
+      <div class="realm-inner" id="realmInner">
+        <div class="realm-label-inner">TINDAKAN NYATA</div>
+        <div class="title-inner" id="titleInner">AKAR BERINGIN</div>
+        <div class="items-inner" id="itemsInner">
+          <div class="item-gold"><span class="gold-bullet"></span> Kerja Bersungguh</div>\n          <div class="item-gold"><span class="gold-bullet"></span> Tancapkan Batin</div>\n          <div class="item-gold"><span class="gold-bullet"></span> Terus Bertumbuh</div>
+        </div>
+
+        <div class="boat-container" id="boatContainer">
+          <svg class="boat-svg" viewBox="0 0 100 50"><circle cx="50" cy="20" r="14" fill="rgba(212,175,55,0.2)" stroke="#d4af37" stroke-width="1.8" /><line x1="50" y1="34" x2="50" y2="46" stroke="#d4af37" stroke-width="2.5" /><line x1="50" y1="46" x2="38" y2="48" stroke="#d4af37" stroke-width="1.5" /><line x1="50" y1="46" x2="62" y2="48" stroke="#d4af37" stroke-width="1.5" /></svg>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const tl = gsap.timeline({ paused: true });
+
+    tl.from("#horizonContainer", { scaleX: 0, opacity: 0, duration: 1.2, ease: "power2.out" })
+      .from("#realmOuter", { y: -30, opacity: 0, duration: 1.0, ease: "power2.out" }, "-=0.6")
+      .from("#itemsOuter .item-smoke", { y: -15, opacity: 0, stagger: 0.25, duration: 0.8, ease: "power2.out" }, "-=0.5")
+      .from("#tagDissolve", { opacity: 0, scale: 0.8, duration: 0.6, ease: "back.out(1.5)" }, "-=0.2")
+      .to("#tagDissolve", { opacity: 1, scale: 1.1, duration: 0.6, ease: "power1.inOut" }, "+=3.5")
+      .to("#realmOuter", {
+        filter: "blur(18px)",
+        y: -40,
+        opacity: 0.15,
+        scale: 0.95,
+        duration: 2.2,
+        ease: "power2.inOut"
+      }, "+=0.5")
+      .from("#realmInner", { y: 40, opacity: 0, duration: 1.2, ease: "power2.out" }, "-=1.0")
+      .from("#itemsInner .item-gold", { y: 20, opacity: 0, stagger: 0.35, duration: 0.9, ease: "power2.out" }, "-=0.6")
+      .from("#boatContainer", { scale: 0.6, opacity: 0, duration: 1.2, ease: "back.out(1.4)" }, "-=0.4")
+      .to("#titleInner", {
+        scale: 1.05,
+        filter: "drop-shadow(0 0 40px rgba(212, 175, 55, 0.85))",
+        duration: 1.5,
+        yoyo: true,
+        repeat: 2,
+        ease: "sine.inOut"
+      }, "<")
+      .to("#boatContainer svg", {
+        y: -5,
+        rotation: 1.5,
+        duration: 2.0,
+        yoyo: true,
+        repeat: 4,
+        ease: "sine.inOut"
+      }, "<");
+
+    window.__timelines = { "main": tl };
+    tl.seek(0);
+  </script>
+</body>
+</html>
