@@ -108,6 +108,17 @@ jobs:
           fi
           echo "Successfully staged $VIDEO_FILE to GitHub Release $TAG!"
 
+      - name: Publish to Multi-Platform (Autonomous Zernio TikTok & Instagram + YouTube)
+        env:
+          ZERNIO_API_KEY: ${{ secrets.ZERNIO_API_KEY }}
+          TIKTOK_ACCOUNT_ID: ${{ secrets.TIKTOK_ACCOUNT_ID }}
+          INSTAGRAM_ACCOUNT_ID: ${{ secrets.INSTAGRAM_ACCOUNT_ID }}
+          YT_REFRESH_TOKEN: ${{ secrets.YT_REFRESH_TOKEN }}
+          GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
+          GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
+        run: |
+          python3 scripts/publish.py publish ${{ steps.resolve_day.outputs.day }}
+
       - name: Update Campaign State
         run: |
           DAY_NUM=${{ steps.resolve_day.outputs.day }}
@@ -116,6 +127,6 @@ jobs:
           echo "{\"current_day\": $NEXT_DAY, \"last_produced_day\": $DAY_NUM, \"updated_at\": \"$(date -u)\"}" > state/day.json
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git add state/day.json
-          git diff --quiet && git diff --staged --quiet || git commit -m "chore(state): advance day to $NEXT_DAY [skip ci]"
+          git add state/
+          git diff --quiet && git diff --staged --quiet || git commit -m "chore(state): advance day to $NEXT_DAY and record publish [skip ci]"
           git push origin main || true

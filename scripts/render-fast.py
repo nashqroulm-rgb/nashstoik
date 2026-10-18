@@ -100,11 +100,11 @@ def render_day_fast(day_num):
 
     # 5. FFmpeg Ultra-Fast Assembly Filter Complex
     filter_complex = f'''
-[0:v]scale=720:1280:force_original_aspect_ratio=increase,crop=720:1280,trim=duration={d1:.2f},setpts=PTS-STARTPTS[v0];
-[1:v]scale=720:1280:force_original_aspect_ratio=increase,crop=720:1280,trim=duration={d2:.2f},setpts=PTS-STARTPTS[v1];
-[2:v]scale=720:1280:force_original_aspect_ratio=increase,crop=720:1280,trim=duration={d3:.2f},setpts=PTS-STARTPTS[v2];
-[3:v]scale=720:1280:force_original_aspect_ratio=increase,crop=720:1280,trim=duration={d4:.2f},setpts=PTS-STARTPTS[v3];
-[4:v]scale=720:1280:force_original_aspect_ratio=increase,crop=720:1280,trim=duration={d5:.2f},setpts=PTS-STARTPTS[v4];
+[0:v]scale=720:1280:force_original_aspect_ratio=increase,crop=720:1280,setsar=1:1,trim=duration={d1:.2f},setpts=PTS-STARTPTS[v0];
+[1:v]scale=720:1280:force_original_aspect_ratio=increase,crop=720:1280,setsar=1:1,trim=duration={d2:.2f},setpts=PTS-STARTPTS[v1];
+[2:v]scale=720:1280:force_original_aspect_ratio=increase,crop=720:1280,setsar=1:1,trim=duration={d3:.2f},setpts=PTS-STARTPTS[v2];
+[3:v]scale=720:1280:force_original_aspect_ratio=increase,crop=720:1280,setsar=1:1,trim=duration={d4:.2f},setpts=PTS-STARTPTS[v3];
+[4:v]scale=720:1280:force_original_aspect_ratio=increase,crop=720:1280,setsar=1:1,trim=duration={d5:.2f},setpts=PTS-STARTPTS[v4];
 [v0][v1][v2][v3][v4]concat=n=5:v=1:a=0[vbase];
 [vbase]subtitles='{srt_escaped}':force_style='PlayResX=720,PlayResY=1280,FontSize=28,PrimaryColour=&H00FFFFFF,OutlineColour=&H00000000,BorderStyle=3,Outline=2,Shadow=1,MarginV=90,Alignment=2,Fontname=Arial'[vsub];
 [vsub]drawbox=x=220:y=40:w=280:h=44:color=black@0.75:t=fill,drawbox=x=220:y=40:w=280:h=44:color=0xd4af37@0.6:t=1,drawtext=text='NASH STOIK  •  KETENANGAN JIWA':fontcolor=white:fontsize=10:x=(w-text_w)/2:y=56[vout];
