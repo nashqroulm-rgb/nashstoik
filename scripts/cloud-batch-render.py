@@ -51,15 +51,16 @@ def render_and_stage_day(day_num):
     cmd_broll = [sys.executable, os.path.join(BASE_DIR, "scripts/fetch-broll.py"), str(day_num)]
     subprocess.run(cmd_broll, check=True)
 
-    # 4. Render HyperFrames
-    hf_scene = os.path.join(HF_SCENES_DIR, f"scene_day{day_str}.html")
-    hf_out = os.path.join(PUBLIC_DIR, f"hyperframes_day{day_str}.mp4")
-    if not os.path.exists(hf_out):
-        print(f"🎨 Step 2/4: Rendering HyperFrames vector scene ({hf_scene})...")
-        cmd_hf = ["npx", "hyperframes", "render", "-c", hf_scene, "-o", hf_out, "--fps", "24", "--low-memory-mode"]
-        subprocess.run(cmd_hf, check=True, shell=(os.name == "nt"))
+    # 4. Render HyperFrames (using relative paths for hyperframes CLI compatibility)
+    hf_scene_rel = f"hyperframes_scenes/scenes/scene_day{day_str}.html"
+    hf_out_rel = f"public/hyperframes_day{day_str}.mp4"
+    hf_out_abs = os.path.join(BASE_DIR, hf_out_rel)
+    if not os.path.exists(hf_out_abs):
+        print(f"🎨 Step 2/4: Rendering HyperFrames vector scene ({hf_scene_rel})...")
+        cmd_hf = ["npx", "hyperframes", "render", "-c", hf_scene_rel, "-o", hf_out_rel, "--fps", "24", "--low-memory-mode"]
+        subprocess.run(cmd_hf, check=True, cwd=BASE_DIR, shell=(os.name == "nt"))
     else:
-        print(f"🎨 Step 2/4: HyperFrames {hf_out} already rendered.")
+        print(f"🎨 Step 2/4: HyperFrames {hf_out_rel} already rendered.")
 
     # 5. Assemble Video
     print(f"🎬 Step 3/4: Assembling video with FFmpeg for Day {day_str}...")
@@ -93,9 +94,9 @@ def render_and_stage_day(day_num):
     day_broll_dir = os.path.join(PUBLIC_DIR, f"broll/day_{day_str}")
     if os.path.exists(day_broll_dir):
         shutil.rmtree(day_broll_dir, ignore_errors=True)
-    if os.path.exists(hf_out):
+    if os.path.exists(hf_out_abs):
         try:
-            os.remove(hf_out)
+            os.remove(hf_out_abs)
         except Exception:
             pass
     if os.path.exists(video_file):
@@ -133,6 +134,8 @@ def main():
     print(f"========================================================")
     print(f"BATCH FINISHED: {succeeded} succeeded, {failed} failed (Range: {start_day}..{end_day})")
     print(f"========================================================")
+    if failed > 0:
+        sys.exit(1)
 
 if __name__ == "__main__":
     main()

@@ -47,13 +47,13 @@ def render_day_fast(day_num):
         hf_mp4 = os.path.join(PUBLIC_DIR, "hyperframes_stoic_ethereal.mp4")
     else:
         hf_mp4 = os.path.join(PUBLIC_DIR, f"hyperframes_day{day_str}.mp4")
-        hf_html = os.path.join(HF_SCENES_DIR, f"scene_day{day_str}.html")
+        hf_scene_rel = f"hyperframes_scenes/scenes/scene_day{day_str}.html"
+        hf_out_rel = f"public/hyperframes_day{day_str}.mp4"
         
         if not os.path.exists(hf_mp4):
-            print(f"Rendering dedicated HyperFrames for Day {day_str} ({hf_html})...")
-            cmd_hf = ["npx", "hyperframes", "render", "-c", hf_html, "-o", hf_mp4, "--fps", "24", "--low-memory-mode"]
-            # on Windows shell might be needed
-            subprocess.run(cmd_hf, check=True, shell=(os.name == "nt"))
+            print(f"Rendering dedicated HyperFrames for Day {day_str} ({hf_scene_rel})...")
+            cmd_hf = ["npx", "hyperframes", "render", "-c", hf_scene_rel, "-o", hf_out_rel, "--fps", "24", "--low-memory-mode"]
+            subprocess.run(cmd_hf, check=True, cwd=BASE_DIR, shell=(os.name == "nt"))
 
     # 3. Resolve Unique B-roll
     if day_num == 1:
