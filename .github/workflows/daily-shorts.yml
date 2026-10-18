@@ -1,13 +1,13 @@
-name: Daily Stoic Shorts Pipeline
+name: Daily Stoic Shorts Pipeline (Zero Deja-Vu Cloud Runner)
 
 on:
   schedule:
-    # 06:45 WIB = 23:45 UTC (Off-peak minute 45)
+    # 06:45 WIB = 23:45 UTC
     - cron: '45 23 * * *'
   workflow_dispatch:
     inputs:
       day:
-        description: 'Day index to render & publish (e.g. 1, 2)'
+        description: 'Day index to render & publish (1-7 or up to 180)'
         required: false
         default: '1'
 
@@ -17,11 +17,13 @@ permissions:
 jobs:
   build-and-publish:
     runs-on: ubuntu-latest
-    timeout-minutes: 35
+    timeout-minutes: 30
 
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -33,35 +35,87 @@ jobs:
         with:
           python-version: '3.11'
 
-      - name: Install System Dependencies (FFmpeg)
+      - name: Install System Dependencies (FFmpeg & Google Chrome)
         run: |
           sudo apt-get update
-          sudo apt-get install -y ffmpeg
+          sudo apt-get install -y ffmpeg google-chrome-stable
 
       - name: Install Node Dependencies
         run: npm install
 
-      - name: Install Python Dependencies
-        run: pip install edge-tts
+      - name: Resolve Target Day
+        id: resolve_day
+        run: |
+          DAY="${{ github.event.inputs.day }}"
+          if [ -z "$DAY" ]; then
+            # Check state/day.json if present, otherwise default to 1
+            if [ -f "state/day.json" ]; then
+              DAY=$(python3 -c "import json; print(json.load(open('state/day.json')).get('current_day', 1))")
+            else
+              DAY=1
+            fi
+          fi
+          DAY_STR=$(printf "%03d" "$DAY")
+          echo "day=$DAY" >> $GITHUB_OUTPUT
+          echo "day_str=$DAY_STR" >> $GITHUB_OUTPUT
+          echo "Target production Day: $DAY ($DAY_STR)"
 
-      - name: Execute Daily Pipeline
+      - name: Fetch Dedicated B-roll (Cloud Network - Zero Local Quota)
+        run: |
+          python3 scripts/fetch-broll.py ${{ steps.resolve_day.outputs.day }}
+
+      - name: Render Dedicated HyperFrames Vector Scene
+        run: |
+          DAY_NUM=${{ steps.resolve_day.outputs.day }}
+          DAY_STR=${{ steps.resolve_day.outputs.day_str }}
+          if [ "$DAY_NUM" -eq 1 ]; then
+            HF_SCENE="hyperframes_scenes/scenes/scene_stoic_ethereal.html"
+            HF_OUT="public/hyperframes_stoic_ethereal.mp4"
+          else
+            HF_SCENE="hyperframes_scenes/scenes/scene_day${DAY_STR}.html"
+            HF_OUT="public/hyperframes_day${DAY_STR}.mp4"
+          fi
+          
+          if [ ! -f "$HF_OUT" ]; then
+            echo "Rendering HyperFrames $HF_SCENE -> $HF_OUT..."
+            npx hyperframes render -c "$HF_SCENE" -o "$HF_OUT" --fps 24 --low-memory-mode
+          else
+            echo "HyperFrames $HF_OUT already exists. Skipping."
+          fi
+
+      - name: Assemble & Compress Video (FFmpeg Zero Deja-Vu)
+        run: |
+          python3 scripts/render-fast.py ${{ steps.resolve_day.outputs.day }}
+
+      - name: Stage Output Video to GitHub Release
         env:
-          ZERNIO_API_KEY: ${{ secrets.ZERNIO_API_KEY }}
-          TIKTOK_ACCOUNT_ID: ${{ secrets.TIKTOK_ACCOUNT_ID }}
-          TIKTOK_USERNAME: ${{ secrets.TIKTOK_USERNAME }}
-          INSTAGRAM_ACCOUNT_ID: ${{ secrets.INSTAGRAM_ACCOUNT_ID }}
-          INSTAGRAM_USERNAME: ${{ secrets.INSTAGRAM_USERNAME }}
-          GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
-          GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
-          YT_REFRESH_TOKEN: ${{ secrets.YT_REFRESH_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          echo "Running Nash Stoik Daily Pipeline..."
-          npx tsx scripts/pipeline-daily.ts --day ${{ github.event.inputs.day || '1' }}
+          DAY_NUM=${{ steps.resolve_day.outputs.day }}
+          DAY_STR=${{ steps.resolve_day.outputs.day_str }}
+          TAG="v-day-${DAY_STR}"
+          VIDEO_FILE="output/nash_stoik_day_${DAY_STR}_compressed.mp4"
+          
+          echo "Checking release tag: $TAG..."
+          if gh release view "$TAG" > /dev/null 2>&1; then
+            echo "Release $TAG exists. Uploading/clobbering asset..."
+            gh release upload "$TAG" "$VIDEO_FILE" --clobber
+          else
+            echo "Creating new release $TAG and attaching $VIDEO_FILE..."
+            gh release create "$TAG" "$VIDEO_FILE" \
+              --title "Nash Stoik Day ${DAY_STR}: Master Short Video" \
+              --notes "Automated cloud production asset for Nash Stoik Day ${DAY_STR}.\nRendered on GitHub Actions cloud runner."
+          fi
+          echo "Successfully staged $VIDEO_FILE to GitHub Release $TAG!"
 
-      - name: Commit State Updates
+      - name: Update Campaign State
         run: |
-          git config --global user.name "nashqroulm-rgb"
-          git config --global user.email "nasheroulb@gmail.com"
-          git add state/
-          git diff --quiet && git diff --staged --quiet || git commit -m "chore: sync publish state [skip ci]"
-          git push origin main
+          DAY_NUM=${{ steps.resolve_day.outputs.day }}
+          NEXT_DAY=$((DAY_NUM + 1))
+          mkdir -p state
+          echo "{\"current_day\": $NEXT_DAY, \"last_produced_day\": $DAY_NUM, \"updated_at\": \"$(date -u)\"}" > state/day.json
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add state/day.json
+          git diff --quiet && git diff --staged --quiet || git commit -m "chore(state): advance day to $NEXT_DAY [skip ci]"
+          git push origin main || true
