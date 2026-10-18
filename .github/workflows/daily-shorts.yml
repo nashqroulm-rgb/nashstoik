@@ -60,34 +60,7 @@ jobs:
           echo "day_str=$DAY_STR" >> $GITHUB_OUTPUT
           echo "Target production Day: $DAY ($DAY_STR)"
 
-      - name: Fetch Dedicated B-roll (Cloud Network - Zero Local Quota)
-        run: |
-          python3 scripts/fetch-broll.py ${{ steps.resolve_day.outputs.day }}
-
-      - name: Render Dedicated HyperFrames Vector Scene
-        run: |
-          DAY_NUM=${{ steps.resolve_day.outputs.day }}
-          DAY_STR=${{ steps.resolve_day.outputs.day_str }}
-          if [ "$DAY_NUM" -eq 1 ]; then
-            HF_SCENE="hyperframes_scenes/scenes/scene_stoic_ethereal.html"
-            HF_OUT="public/hyperframes_stoic_ethereal.mp4"
-          else
-            HF_SCENE="hyperframes_scenes/scenes/scene_day${DAY_STR}.html"
-            HF_OUT="public/hyperframes_day${DAY_STR}.mp4"
-          fi
-          
-          if [ ! -f "$HF_OUT" ]; then
-            echo "Rendering HyperFrames $HF_SCENE -> $HF_OUT..."
-            npx hyperframes render -c "$HF_SCENE" -o "$HF_OUT" --fps 24 --low-memory-mode
-          else
-            echo "HyperFrames $HF_OUT already exists. Skipping."
-          fi
-
-      - name: Assemble & Compress Video (FFmpeg Zero Deja-Vu)
-        run: |
-          python3 scripts/render-fast.py ${{ steps.resolve_day.outputs.day }}
-
-      - name: Stage Output Video to GitHub Release
+      - name: Fetch or Render Master Video
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
@@ -95,18 +68,30 @@ jobs:
           DAY_STR=${{ steps.resolve_day.outputs.day_str }}
           TAG="v-day-${DAY_STR}"
           VIDEO_FILE="output/nash_stoik_day_${DAY_STR}_compressed.mp4"
-          
-          echo "Checking release tag: $TAG..."
-          if gh release view "$TAG" > /dev/null 2>&1; then
-            echo "Release $TAG exists. Uploading/clobbering asset..."
-            gh release upload "$TAG" "$VIDEO_FILE" --clobber
+          mkdir -p output
+
+          echo "Checking if master video for Day $DAY_STR exists in release $TAG..."
+          if gh release download "$TAG" -p "nash_stoik_day_${DAY_STR}_compressed.mp4" -D output --clobber > /dev/null 2>&1; then
+            echo "✅ Master video found and downloaded from GitHub Release $TAG!"
           else
-            echo "Creating new release $TAG and attaching $VIDEO_FILE..."
+            echo "⚡ Release not found. Rendering fresh via cloud pipeline..."
+            python3 scripts/fetch-broll.py "$DAY_NUM"
+            if [ "$DAY_NUM" -eq 1 ]; then
+              HF_SCENE="hyperframes_scenes/scenes/scene_stoic_ethereal.html"
+              HF_OUT="public/hyperframes_stoic_ethereal.mp4"
+            else
+              HF_SCENE="hyperframes_scenes/scenes/scene_day${DAY_STR}.html"
+              HF_OUT="public/hyperframes_day${DAY_STR}.mp4"
+            fi
+            if [ ! -f "$HF_OUT" ]; then
+              npx hyperframes render -c "$HF_SCENE" -o "$HF_OUT" --fps 24 --low-memory-mode
+            fi
+            python3 scripts/render-fast.py "$DAY_NUM"
             gh release create "$TAG" "$VIDEO_FILE" \
               --title "Nash Stoik Day ${DAY_STR}: Master Short Video" \
-              --notes "Automated cloud production asset for Nash Stoik Day ${DAY_STR}.\nRendered on GitHub Actions cloud runner."
+              --notes "Automated cloud production asset for Nash Stoik Day ${DAY_STR}.\nRendered on GitHub Actions cloud runner." || \
+            gh release upload "$TAG" "$VIDEO_FILE" --clobber
           fi
-          echo "Successfully staged $VIDEO_FILE to GitHub Release $TAG!"
 
       - name: Publish to Multi-Platform (Autonomous Zernio TikTok & Instagram + YouTube)
         env:
