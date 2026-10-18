@@ -12,6 +12,7 @@ on:
           - 'batch_1 (Days 008-028)'
           - 'batch_2 (Days 030-056)'
           - 'batch_3 (Days 057-084)'
+          - 'batch_4 (Days 085-112)'
         default: 'all_batches'
 
 permissions:
@@ -122,3 +123,38 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: python3 scripts/cloud-batch-render.py 57 84
+
+  batch-4:
+    if: github.event.inputs.target == 'all_batches' || github.event.inputs.target == 'batch_4 (Days 085-112)'
+    name: Batch 4 - Month 4 (Days 085-112)
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install System Dependencies (FFmpeg & Google Chrome)
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ffmpeg google-chrome-stable
+
+      - name: Install Node Dependencies
+        run: npm install
+
+      - name: Run Cloud Batch 4 (Days 85..112)
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: python3 scripts/cloud-batch-render.py 85 112
