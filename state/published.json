@@ -14,5 +14,22 @@
       "ok": false,
       "status": "skipped_no_token"
     }
+  },
+  "001": {
+    "day": 1,
+    "day_str": "001",
+    "timestamp": "2026-10-19 01:41:51 UTC",
+    "zernio": {
+      "platform": "zernio",
+      "ok": true,
+      "postId": "6ad57562846d14f7778b55a1",
+      "publicUrl": "https://media.zernio.com/temp/1792374112298_a4oezufm_nash_stoik_day_001_compressed.mp4"
+    },
+    "youtube": {
+      "platform": "youtube",
+      "ok": true,
+      "videoId": "6f-May5Owi8",
+      "url": "https://youtu.be/6f-May5Owi8"
+    }
   }
 }
