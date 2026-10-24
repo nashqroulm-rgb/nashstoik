@@ -2,8 +2,8 @@ name: Daily Stoic Shorts Pipeline (Zero Deja-Vu Cloud Runner)
 
 on:
   schedule:
-    # 06:45 WIB = 23:45 UTC
-    - cron: '45 23 * * *'
+    # 04:45 WIB = 21:45 UTC (Jam tayang subuh serentak)
+    - cron: '45 21 * * *'
   workflow_dispatch:
     inputs:
       day:
