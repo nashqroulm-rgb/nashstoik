@@ -133,5 +133,22 @@
       "videoId": "DiazepNxgwQ",
       "url": "https://youtu.be/DiazepNxgwQ"
     }
+  },
+  "008": {
+    "day": 8,
+    "day_str": "008",
+    "timestamp": "2026-10-25 23:34:29 UTC",
+    "zernio": {
+      "platform": "zernio",
+      "ok": true,
+      "postId": "6ade920783be86442a5daea3",
+      "publicUrl": "https://media.zernio.com/temp/1792971269707_zyqr0xmx_nash_stoik_day_008_compressed.mp4"
+    },
+    "youtube": {
+      "platform": "youtube",
+      "ok": true,
+      "videoId": "KJ-M8pqrtUc",
+      "url": "https://youtu.be/KJ-M8pqrtUc"
+    }
   }
 }
