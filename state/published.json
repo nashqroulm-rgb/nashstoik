@@ -3,16 +3,18 @@
   "027": {
     "day": 27,
     "day_str": "027",
-    "timestamp": "2026-10-18 08:54:22 UTC",
+    "timestamp": "2026-11-15 01:20:33 UTC",
     "zernio": {
       "platform": "zernio",
       "ok": true,
-      "postId": "6ad4894089d6c51e42f149c8",
-      "publicUrl": "https://media.zernio.com/temp/1792313662446_2udd0oh6_nash_stoik_day_027_compressed.mp4"
+      "postId": "6af908e2188a5ed9f99e72ce",
+      "publicUrl": "https://media.zernio.com/temp/1794705633460_04769c6521493bc3_nash_stoik_day_027_compressed.mp4"
     },
     "youtube": {
-      "ok": false,
-      "status": "skipped_no_token"
+      "platform": "youtube",
+      "ok": true,
+      "videoId": "ioqWMC6CA0s",
+      "url": "https://youtu.be/ioqWMC6CA0s"
     }
   },
   "001": {
