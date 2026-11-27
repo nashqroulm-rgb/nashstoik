@@ -645,5 +645,22 @@
       "videoId": "yjh_AJYssvo",
       "url": "https://youtu.be/yjh_AJYssvo"
     }
+  },
+  "039": {
+    "day": 39,
+    "day_str": "039",
+    "timestamp": "2026-11-27 03:47:55 UTC",
+    "zernio": {
+      "platform": "zernio",
+      "ok": true,
+      "postId": "6b08fd6dd2509164ea7cac1f",
+      "publicUrl": "https://media.zernio.com/temp/1795751276071_3e850f4480be6da0_nash_stoik_day_039_compressed.mp4"
+    },
+    "youtube": {
+      "platform": "youtube",
+      "ok": true,
+      "videoId": "KwWkKNWIedY",
+      "url": "https://youtu.be/KwWkKNWIedY"
+    }
   }
 }
